@@ -1,0 +1,64 @@
+{
+  "name": "sunrise-utils",
+  "version": "1.0.14",
+  "description": "一个使用esbuild进行本地开发的工具库， 包含了一些常用的工具函数，主要是使用在浏览器环境",
+  "main": "dist/index.esm.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**",
+    "README.md"
+  ],
+  "scripts": {
+    "push": "node ./publish.js",
+    "dev:tsc": "tsc -w",
+    "build:dev": "cross-env NODE_ENV=development rollup -c",
+    "build:prod": "cross-env NODE_ENV=production rollup -c",
+    "start:dev": "node esbuild-build.js",
+    "tests": "node esbuild-build.js && node index.js",
+    "test": "api-extractor run -c api-extractor.json",
+    "pretests": "npm run test",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs",
+    "commit": "git-cz",
+    "docs:push": "scp -r C:\\Users\\hover\\Desktop\\test\\npm\\npm-cli\\packages\\sunrise\\docs\\.vitepress\\dist root@47.111.168.59:/home/npm"
+  },
+  "repository": {
+    "directory": "packages/sunrise",
+    "type": "git",
+    "url": "https://github.com/Sunrisies/firefly.git"
+  },
+  "keywords": [
+    "library",
+    "typescript",
+    "utils",
+    "esbuild"
+  ],
+  "author": "朝阳",
+  "license": "MIT",
+  "devDependencies": {
+    "@commitlint/config-conventional": "^19.6.0",
+    "@microsoft/api-documenter": "^7.26.2",
+    "@microsoft/api-extractor": "^7.43.1",
+    "@types/inquirer": "^9.0.7",
+    "@typescript-eslint/eslint-plugin": "^8.18.0",
+    "@typescript-eslint/parser": "^8.18.0",
+    "commitizen": "^4.3.1",
+    "cross-env": "^7.0.3",
+    "cross-spawn": "^7.0.3",
+    "cz-git": "^1.11.0",
+    "esbuild": "^0.20.2",
+    "esbuild-plugin-d.ts": "^1.3.1",
+    "eslint": "^9.16.0",
+    "eslint-plugin-tsdoc": "^0.4.0",
+    "jsdoc": "^4.0.4",
+    "typescript": "^5.7.2",
+    "vitepress": "^1.1.4"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-git"
+    }
+  }
+}
