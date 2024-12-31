@@ -1,10 +1,10 @@
 module.exports =  {
   plugins: [
     "@typescript-eslint/eslint-plugin",
-    "eslint-plugin-tsdoc"
   ],
   extends:  [
-    'plugin:@typescript-eslint/recommended'
+    'plugin:@typescript-eslint/recommended',
+    "plugin:jsdoc/recommended"
   ],
   parser:  '@typescript-eslint/parser',
   parserOptions: {
