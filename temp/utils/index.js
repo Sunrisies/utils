@@ -111,28 +111,6 @@ export const conversionTime = (time) => {
     const minutes = date.getMinutes();
     return `${year}年${month}月${day}日${hours}时${minutes}分`;
 };
-/**
- * 随机生成指定长度的字符串。
- *
- * @param {number} length - 字符串的长度，必须是一个正整数。
- * @returns {string|Error} - 返回生成的随机字符串；如果输入的长度无效，则返回一个 Error 对象。
- * @throws {Error} - 当长度参数不是正整数时抛出错误。
- *
- * @example
- * // 示例：生成一个长度为 10 的随机字符串
- * const randomStr = genRandStr(10)
- * if (randomStr instanceof Error) {
- *   console.error(randomStr.message)
- * } else {
- *   console.log(randomStr) // 输出类似 'aB3dE7fGh9'
- * }
- *
- * // 示例：尝试生成一个长度为负数的随机字符串
- * const invalidStr = genRandStr(-5)
- * if (invalidStr instanceof Error) {
- *   console.error(invalidStr.message) // 输出 'Length must be a positive number'
- * }
- */
 export const genRandStr = (length) => {
     if (typeof length !== 'number' || length <= 0) {
         return new Error('Length must be a positive number');

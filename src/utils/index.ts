@@ -3,7 +3,7 @@
  *
  * @param {string} elementId - 要获取尺寸的元素的ID。
  * @returns {Error | { width: number, height: number }} - 返回一个包含width和height的对象，如果找不到元素或无法获取计算样式则返回null。
- * 
+ *
  * @example
  * // 示例：获取ID为 'myElement' 的元素的内容区域尺寸
  * const dimensions = getContentDimensions('myElement')
@@ -14,7 +14,7 @@
  *   console.error('无法获取元素的尺寸')
  * }
  */
-export const getContentDimensions = (elementId: string): Error | { width: number, height: number } => {
+export const getContentDimensions = (elementId: string): Error | { width: number; height: number } => {
   const element = document.getElementById(elementId)
   if (element) {
     const rect = element.getBoundingClientRect()
@@ -39,13 +39,12 @@ export const getContentDimensions = (elementId: string): Error | { width: number
   }
 }
 
-
 /**
  * 预加载并缓存一组图片资源。
- * 
+ *
  * @param {string[]} imageUrls - 图片资源的URL数组。
  * @returns {Promise<HTMLImageElement[]>} - 返回一个Promise，该Promise在所有图片加载完成后解析为一个包含HTMLImageElement对象的数组。
- * 
+ *
  * @example
  * // 示例：预加载并缓存一组图片
  * preloadAndCacheImages(['https://example.com/image1.jpg', 'https://example.com/image2.jpg'])
@@ -61,14 +60,14 @@ export const preloadAndCacheImages = (imageUrls: string[]): Promise<HTMLImageEle
     imageUrls.map(
       (url) =>
         new Promise<HTMLImageElement>((resolve, reject) => {
-          const image = new Image();
-          image.onload = () => resolve(image);
-          image.onerror = () => reject(new Error(`图片加载失败: ${url}`));
-          image.src = url;
+          const image = new Image()
+          image.onload = () => resolve(image)
+          image.onerror = () => reject(new Error(`图片加载失败: ${url}`))
+          image.src = url
         })
     )
-  );
-};
+  )
+}
 
 /**
  * 预加载并缓存图片资源。
@@ -121,30 +120,30 @@ export const conversionTime = (time: number): string => {
 }
 
 /**
- * 随机生成指定长度的字符串。
+ * 根据传入的参数类型生成随机字符串或返回错误。
+ * - 如果传入的参数是 `number` 类型且大于 0，返回生成的随机字符串。
+ * - 如果传入的参数不是 `number` 类型或小于等于 0，返回 `Error` 对象。
  *
- * @param {number} length - 字符串的长度，必须是一个正整数。
- * @returns {string|Error} - 返回生成的随机字符串；如果输入的长度无效，则返回一个 Error 对象。
- * @throws {Error} - 当长度参数不是正整数时抛出错误。
+ * @template T - 参数的类型，可以是 `number` 或其他类型。
+ * @param {T} length - 随机字符串的长度。如果类型是 `number` 且大于 0，则生成对应长度的随机字符串；否则返回错误。
+ * @returns {GenRandStrResult<T>} - 如果 `length` 是 `number` 类型且大于 0，返回 `string`；否则返回 `Error`。
  *
  * @example
- * // 示例：生成一个长度为 10 的随机字符串
- * const randomStr = genRandStr(10)
- * if (randomStr instanceof Error) {
- *   console.error(randomStr.message)
- * } else {
- *   console.log(randomStr) // 输出类似 'aB3dE7fGh9'
- * }
+ * // 示例 1: 传入合法的 number 类型
+ * const result1 = genRandStr(10); // 返回 string
+ * console.log(result1); // 输出随机字符串，如 "aB3dE7gH9j"
  *
- * // 示例：尝试生成一个长度为负数的随机字符串
- * const invalidStr = genRandStr(-5)
- * if (invalidStr instanceof Error) {
- *   console.error(invalidStr.message) // 输出 'Length must be a positive number'
- * }
+ * @example
+ * // 示例 2: 传入非 number 类型
+ * const result2 = genRandStr('invalid'); // 返回 Error
+ * console.log(result2 instanceof Error ? result2.message : result2); // 输出错误信息
  */
-export const genRandStr = (length: number): string | Error => {
+
+type GenRandStrResult<T> = T extends number ? string : Error
+
+export const genRandStr = <T>(length: T): GenRandStrResult<T> => {
   if (typeof length !== 'number' || length <= 0) {
-    return new Error('Length must be a positive number')
+    return new Error('Length must be a positive number') as GenRandStrResult<T>
   }
 
   const characters: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
@@ -153,5 +152,5 @@ export const genRandStr = (length: number): string | Error => {
     const randomIndex: number = Math.floor(Math.random() * characters.length)
     randomString += characters.charAt(randomIndex)
   }
-  return randomString
+  return randomString as GenRandStrResult<T>
 }
