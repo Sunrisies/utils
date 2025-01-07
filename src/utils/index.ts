@@ -35,7 +35,7 @@ export const getContentDimensions = (elementId: string): Error | { width: number
       return new Error('Element has no computed style' + elementId)
     }
   } else {
-    return new Error('Element not found with ID' + elementId)
+    return new Error("找不到id为" +elementId + "的元素")
   }
 }
 
@@ -139,7 +139,7 @@ export const conversionTime = (time: number): string => {
  * console.log(result2 instanceof Error ? result2.message : result2); // 输出错误信息
  */
 
-type GenRandStrResult<T> = T extends number ? string : Error
+export type GenRandStrResult<T> = T extends number ? string : Error
 
 export const genRandStr = <T>(length: T): GenRandStrResult<T> => {
   if (typeof length !== 'number' || length <= 0) {

@@ -45,16 +45,14 @@ class TimeFormatter {
  * @class TimeUpdater
  */
 export class TimeUpdater {
-    #timer; // 假设 Timer 类已定义
-    #formatter; // 假设 TimeFormatter 类已定义
+    timer; // 假设 Timer 类已定义
+    formatter; // 假设 TimeFormatter 类已定义
     /**
      * 创建一个新的 TimeUpdater 实例。
-     *
-     * @constructor
      */
     constructor() {
-        this.#timer = new Timer();
-        this.#formatter = new TimeFormatter();
+        this.timer = new Timer();
+        this.formatter = new TimeFormatter();
     }
     /**
      * 更新日期和时间，并输出到控制台。
@@ -63,11 +61,11 @@ export class TimeUpdater {
      * @returns {void} 无返回值，通过回调函数传递数据
      * @private
      */
-    #updateDateTime(callback) {
+    updateDateTime(callback) {
         const date = new Date();
-        const formattedDate = this.#formatter.formatDate(date);
-        const today = this.#formatter.getWeekday(date);
-        const nowTime = this.#formatter.formatTime(date);
+        const formattedDate = this.formatter.formatDate(date);
+        const today = this.formatter.getWeekday(date);
+        const nowTime = this.formatter.formatTime(date);
         callback({ formattedDate, today, nowTime });
     }
     /**
@@ -77,8 +75,8 @@ export class TimeUpdater {
      * @public
      */
     startUpdate(callback) {
-        this.#updateDateTime(callback);
-        this.#timer.start(() => this.#updateDateTime(callback), 1000);
+        this.updateDateTime(callback);
+        this.timer.start(() => this.updateDateTime(callback), 1000);
     }
     /**
      * 停止定期更新时间。
@@ -86,7 +84,7 @@ export class TimeUpdater {
      * @public
      */
     stopUpdate() {
-        this.#timer.stop();
+        this.timer.stop();
     }
 }
 /**

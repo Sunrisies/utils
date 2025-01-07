@@ -26,4 +26,6 @@ dist-ssr
 
 # Million Lint
 .million
-*.md
+*.zip
+*.tar.gz
+*.gz

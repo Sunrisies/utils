@@ -36,7 +36,7 @@ export const getContentDimensions = (elementId) => {
         }
     }
     else {
-        return new Error('Element not found with ID' + elementId);
+        return new Error("找不到id为" + elementId + "的元素");
     }
 };
 /**

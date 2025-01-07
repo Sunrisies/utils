@@ -59,17 +59,15 @@ export type UpTimeType = {
  * @class TimeUpdater
  */
 export class TimeUpdater {
-  #timer: Timer // 假设 Timer 类已定义
-  #formatter: TimeFormatter // 假设 TimeFormatter 类已定义
+  private readonly timer: Timer // 假设 Timer 类已定义
+  private readonly formatter: TimeFormatter // 假设 TimeFormatter 类已定义
 
   /**
    * 创建一个新的 TimeUpdater 实例。
-   *
-   * @constructor
    */
   constructor() {
-    this.#timer = new Timer()
-    this.#formatter = new TimeFormatter()
+    this.timer = new Timer()
+    this.formatter = new TimeFormatter()
   }
 
   /**
@@ -79,11 +77,11 @@ export class TimeUpdater {
    * @returns {void} 无返回值，通过回调函数传递数据
    * @private
    */
-  #updateDateTime(callback: (result: UpTimeType) => void): void {
+  private updateDateTime(callback: (result: UpTimeType) => void): void {
     const date = new Date()
-    const formattedDate = this.#formatter.formatDate(date)
-    const today = this.#formatter.getWeekday(date)
-    const nowTime = this.#formatter.formatTime(date)
+    const formattedDate = this.formatter.formatDate(date)
+    const today = this.formatter.getWeekday(date)
+    const nowTime = this.formatter.formatTime(date)
     callback({ formattedDate, today, nowTime })
   }
 
@@ -94,8 +92,8 @@ export class TimeUpdater {
    * @public
    */
   public startUpdate(callback: (result: UpTimeType) => void): void {
-    this.#updateDateTime(callback)
-    this.#timer.start(() => this.#updateDateTime(callback), 1000)
+    this.updateDateTime(callback)
+    this.timer.start(() => this.updateDateTime(callback), 1000)
   }
 
   /**
@@ -104,7 +102,7 @@ export class TimeUpdater {
    * @public
    */
   public stopUpdate(): void {
-    this.#timer.stop()
+    this.timer.stop()
   }
 }
 

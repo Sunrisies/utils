@@ -1,6 +1,6 @@
 {
   "name": "sunrise-utils",
-  "version": "1.0.16",
+  "version": "1.0.18",
   "description": "一个使用esbuild进行本地开发的工具库， 包含了一些常用的工具函数，主要是使用在浏览器环境",
   "main": "dist/index.esm.js",
   "module": "dist/index.esm.js",
@@ -18,16 +18,16 @@
     "tests": "node esbuild-build.js && node index.js",
     "test": "api-extractor run -c api-extractor.json",
     "pretests": "npm run test",
-    "docs:dev": "vitepress dev docs",
-    "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress preview docs",
+    "docs:dev": "vitepress dev",
+    "docs:build": "vitepress build",
+    "docs:preview": "vitepress preview",
     "commit": "git-cz",
     "docs:push": "scp -r C:\\Users\\hover\\Desktop\\test\\npm\\npm-cli\\packages\\sunrise\\docs\\.vitepress\\dist root@47.111.168.59:/home/npm"
   },
   "repository": {
     "directory": "packages/sunrise",
     "type": "git",
-    "url": "https://github.com/Sunrisies/firefly.git"
+    "url": "https://github.com/Sunrisies/utils.git"
   },
   "keywords": [
     "library",
@@ -53,8 +53,12 @@
     "eslint": "^9.16.0",
     "eslint-plugin-tsdoc": "^0.4.0",
     "jsdoc": "^4.0.4",
+    "typedoc": "^0.27.6",
+    "typedoc-plugin-frontmatter": "^1.1.2",
+    "typedoc-plugin-markdown": "^4.4.1",
+    "typedoc-vitepress-theme": "^1.1.1",
     "typescript": "^5.7.2",
-    "vitepress": "^1.1.4"
+    "vitepress": "^1.5.0"
   },
   "config": {
     "commitizen": {

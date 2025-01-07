@@ -1,0 +1,13 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": ["./src/"],
+  "plugin": ["typedoc-plugin-markdown", "typedoc-vitepress-theme"],
+  "lang": "zh",
+  "sidebar": {
+    "autoConfiguration": true,
+    "format": "vitepress",
+    "pretty": false,
+    "collapsed": true
+  },
+  "disableSources": true // 禁用源码
+}
