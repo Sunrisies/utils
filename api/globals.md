@@ -15,6 +15,7 @@
 - [calculateNewPoints](functions/calculateNewPoints.md)
 - [conversionTime](functions/conversionTime.md)
 - [distanceLngLat](functions/distanceLngLat.md)
+- [downloadFile](functions/downloadFile.md)
 - [genRandStr](functions/genRandStr.md)
 - [getContentDimensions](functions/getContentDimensions.md)
 - [preloadAndCacheImage](functions/preloadAndCacheImage.md)
