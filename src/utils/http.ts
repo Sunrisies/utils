@@ -48,3 +48,8 @@ export const downloadFile = async (url: string, filename: string): Promise<void>
     throw error // 抛出错误以便调用方处理
   }
 }
+
+
+export const sum = (a:number,b:number) => {
+  return a + b
+}

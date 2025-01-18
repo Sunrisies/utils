@@ -19,16 +19,16 @@
  * console.log('距离:', result.distance, '米');
  */
 export function distanceLngLat(lat1: number, lon1: number, lat2: number, lon2: number): Point {
-   // 校验纬度范围
-   if (lat1 < -90 || lat1 > 90 || lat2 < -90 || lat2 > 90) {
-    throw new Error('纬度必须在 -90 到 90 之间');
+// 校验纬度范围
+  if (lat1 < -90 || lat1 > 90 || lat2 < -90 || lat2 > 90) {
+    throw new Error('纬度必须在 -90 到 90 之间')
   }
 
   // 校验经度范围
   if (lon1 < -180 || lon1 > 180 || lon2 < -180 || lon2 > 180) {
-    throw new Error('经度必须在 -180 到 180 之间');
+    throw new Error('经度必须在 -180 到 180 之间')
   }
-  
+
   const radLat1 = rad2deg(lat1)
   const radLat2 = rad2deg(lat2)
   const a = radLat1 - radLat2
@@ -39,16 +39,6 @@ export function distanceLngLat(lat1: number, lon1: number, lat2: number, lon2: n
   const distance = s * earthRadius
   const centerLonLat = getCenterLonLat(lon1, lat1, lon2, lat2)
   return { lon: centerLonLat[0], lat: centerLonLat[1], distance: Math.round(distance * 10000) / 10000 }
-}
-
-/**
- * 将角度转换为弧度。
- *
- * @param deg - 角度值。
- * @returns 对应的弧度值。
- */
-function rad(deg: number): number {
-  return (deg * Math.PI) / 180.0
 }
 
 /**
@@ -68,6 +58,15 @@ function rad(deg: number): number {
  * console.log('中心点经纬度:', center) // 输出类似 [118.94055, 35.5693]
  */
 export const getCenterLonLat = (oneLon: number, oneLat: number, twoLon: number, twoLat: number): [number, number] => {
+  // 校验经度范围
+  if (oneLon < -180 || oneLon > 180 || twoLon < -180 || twoLon > 180) {
+    throw new Error('经度必须在 -180 到 180 之间')
+  }
+
+  // 校验纬度范围
+  if (oneLat < -90 || oneLat > 90 || twoLat < -90 || twoLat > 90) {
+    throw new Error('纬度必须在 -90 到 90 之间')
+  }
   const centerLon = (oneLon + twoLon) / 2
   const centerLat = (oneLat + twoLat) / 2
   return [centerLon, centerLat]
@@ -79,7 +78,7 @@ export const getCenterLonLat = (oneLon: number, oneLat: number, twoLon: number, 
  * @param rad - 角度值。
  * @returns 对应的弧度。
  */
-function deg2rad(deg: number):number {
+function deg2rad(deg: number): number {
   return deg * (Math.PI / 180)
 }
 
@@ -127,6 +126,15 @@ export type Point = {
  * // ]
  */
 export const calculateNewPoints = ({ lat, lon, distance }: Point): Array<[number, number]> => {
+  // 校验经度范围
+  if (lon < -180 || lon > 180) {
+    throw new Error('经度必须在 -180 到 180 之间')
+  }
+
+  // 校验纬度范围
+  if (lat < -90 || lat > 90) {
+    throw new Error('纬度必须在 -90 到 90 之间')
+  }
   const R = 6371e3
   const d = distance / R
   const latRad = deg2rad(lat)
