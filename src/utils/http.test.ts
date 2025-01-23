@@ -1,31 +1,6 @@
-import { describe, it, expect, vi,beforeEach,afterEach } from 'vitest';
-import { sum ,downloadFile} from './http';
-describe('sum', () => {
-  it('应正确地将两个正数相加', () => {
-    const result = sum(2, 3)
-    expect(result).toBe(5)
-  })
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { downloadFile } from './http';
 
-  it('应正确添加两个负数', () => {
-    const result = sum(-2, -3)
-    expect(result).toBe(-5)
-  })
-
-  it('应正确添加正数和负数', () => {
-    const result = sum(2, -3)
-    expect(result).toBe(-1)
-  })
-
-  it('应正确地将零和一个数字相加', () => {
-    const result = sum(0, 5)
-    expect(result).toBe(5)
-  })
-
-  it('应正确地将两个大数相加', () => {
-    const result = sum(1000000, 2000000)
-    expect(result).toBe(3000000)
-  })
-})
 // 模拟全局对象和方法
 global.URL.createObjectURL = vi.fn()
 global.URL.revokeObjectURL = vi.fn()
