@@ -149,7 +149,6 @@ export const timeUpdater = new TimeUpdater()
  * @returns {string} - 格式化后的日期时间字符串（格式：YYYY年MM月DD日 HH:mm:ss）
  */
 export const formatChineseDateTime = (date: Date | string): string => {
-
   const dateObj = new Date(date);
   const year = dateObj.getFullYear();
   const month = String(dateObj.getMonth() + 1).padStart(2, '0');
@@ -159,5 +158,3 @@ export const formatChineseDateTime = (date: Date | string): string => {
   const second = String(dateObj.getSeconds()).padStart(2, '0');
   return `${year}年${month}月${day}日 ${hour}:${minute}:${second}`;
 }
-// const data = formatChineseDateTime("2025-03-25T08:32:11.469Z")
-// console.log(data)

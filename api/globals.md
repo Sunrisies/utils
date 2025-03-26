@@ -22,6 +22,7 @@
 - [conversionTime](functions/conversionTime.md)
 - [distanceLngLat](functions/distanceLngLat.md)
 - [downloadFile](functions/downloadFile.md)
+- [formatChineseDateTime](functions/formatChineseDateTime.md)
 - [genRandStr](functions/genRandStr.md)
 - [getContentDimensions](functions/getContentDimensions.md)
 - [preloadAndCacheImage](functions/preloadAndCacheImage.md)

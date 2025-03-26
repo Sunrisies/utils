@@ -4,7 +4,7 @@ pnpm run start:dev
 
 pnpm run dev:tsc
 
-pnpm run tests
+pnpm run test
 
 npx typedoc
 
