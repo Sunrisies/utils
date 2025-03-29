@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { downloadFile } from './http';
+import { downloadFile } from '../utils/http';
 
 // 模拟全局对象和方法
 global.URL.createObjectURL = vi.fn()
@@ -18,12 +18,12 @@ describe('downloadFile', () => {
   beforeEach(() => {
     // 每个测试之前重置模拟
     vi.spyOn(URL, 'createObjectURL').mockImplementation(() => 'mocked-url')
-    vi.spyOn(URL, 'revokeObjectURL').mockImplementation(() => {})
+    vi.spyOn(URL, 'revokeObjectURL').mockImplementation(() => { })
     vi.spyOn(document, 'createElement').mockImplementation(() => ({
       href: '',
       download: '',
       click: vi.fn()
-    })as unknown as HTMLAnchorElement)
+    }) as unknown as HTMLAnchorElement)
     vi.spyOn(document.body, 'appendChild').mockImplementation(() => document.createElement('div'))
     vi.spyOn(document.body, 'removeChild').mockImplementation(() => document.createElement('div'))
   })

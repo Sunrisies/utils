@@ -158,3 +158,10 @@ export const formatChineseDateTime = (date: Date | string): string => {
   const second = String(dateObj.getSeconds()).padStart(2, '0');
   return `${year}年${month}月${day}日 ${hour}:${minute}:${second}`;
 }
+
+const ls = formatChineseDateTime('2025-03-26T15:10:46.000Z')
+console.log(ls)
+const utcDate = new Date('2025-03-26T15:10:46.000Z');
+const beijingDate = utcDate.toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' });
+
+console.log(beijingDate); // 输出：2025/3/26 下午3:10:46

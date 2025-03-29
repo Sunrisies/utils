@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest';
-import { formatChineseDateTime } from './timer';
+import { formatChineseDateTime } from '../utils/timer';
 
 describe('日期时间格式化工具', () => {
     test('正确解析ISO格式字符串', () => {

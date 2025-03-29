@@ -1,4 +1,4 @@
-import { getCenterLonLat ,calculateNewPoints,distanceLngLat} from './map'; // 根据实际文件路径修改
+import { getCenterLonLat, calculateNewPoints, distanceLngLat } from '../utils/map'; // 根据实际文件路径修改
 import { vi, describe, it, expect } from 'vitest';
 
 

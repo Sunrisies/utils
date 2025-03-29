@@ -27,6 +27,7 @@
     "./src"
   ], // 包含的目录或文件列表  
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "**/*.test.ts",
   ] // 排除的目录或文件列表  
 }
