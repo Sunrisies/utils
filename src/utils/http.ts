@@ -63,7 +63,15 @@ export interface ApiResponse<T> {
   message: string
 }
 
-// 使用类支持多个服务
+/**
+ * 创建一个可配置的 HTTP 客户端实例
+ * @param baseURL - 基础请求路径，将自动拼接到所有请求的端点前
+ * @example
+ * ```typescript
+ * // 创建指向 GitHub API 的客户端
+ * const http = new Http('https://api.github.com');
+ * ```
+ */
 export class Http {
   private readonly baseURL: string
   /**
@@ -77,17 +85,29 @@ export class Http {
   }
 
   /**
-   * 发送 HTTP 请求。
-   *
-   * @param endpoint - 请求的端点。
-   * @param config - 请求的配置。
-   * @returns 返回一个 Promise，解析为 ApiResponse。
-   */
+   * 核心请求方法，封装 HTTP 请求的公共逻辑
+   * @template TResponse 响应体数据类型
+   * @template T 请求体数据类型
+   * @param endpoint - 接口端点路径（自动拼接 baseURL）
+   * @param config - 请求配置项
+   * @returns 包含标准化响应格式的 Promise
+   * @throws {Error} 当 HTTP 状态码非 2xx 时抛出错误
+   * 
+   * @example
+   * ```typescript
+   * // 自定义请求配置
+   * await http.request<User>('/users', {
+   *   method: 'POST',
+   *   data: { name: 'John' },
+   *   headers: { 'X-Request-ID': '123' }
+   * });
+   * ```
+  */
   async request<TResponse, T = unknown>(endpoint: string, config: RequestConfig<T> = {}): Promise<ApiResponse<TResponse>> {
     const { params, data, headers = {}, method = 'GET', ...rest } = config
 
     // 处理 URL 参数
-    const queryString = params ? `?${new URLSearchParams(params)}` : ''
+    const queryString = params ? `?${URLSearchParamsUtils(params)}` : ''
     const url = `${this.baseURL}${endpoint}${queryString}`
 
     // 处理请求头
@@ -111,29 +131,33 @@ export class Http {
 
       return result as ApiResponse<TResponse>
     } catch (error) {
-      if (error instanceof Error) {
-        throw error
-      }
-      throw new Error('An unknown error occurred')
+      throw error
     }
   }
   /**
-   * 发送 GET 请求。
-   *
-   * @param endpoint - 请求的端点。
-   * @param config - 请求的配置。
-   * @returns 返回一个 Promise，解析为 ApiResponse。
+   * 发送 GET 请求
+   * @template TResponse 预期响应类型
+   * @param endpoint - 接口端点路径
+   * @param config - 请求配置（自动排除 data 属性）
+   * @returns 包含响应数据的 Promise
+   * 
+   * @example
+   * ```typescript
+   * // 获取用户列表
+   * const { data } = await http.get<User[]>('/users');
+   * ```
    */
   get<TResponse>(endpoint: string, config?: Omit<RequestConfig, 'data' | 'method'>) {
     return this.request<TResponse>(endpoint, { ...config, method: 'GET' })
   }
   /**
-   * 发送 POST 请求。
-   *
-   * @param endpoint - 请求的端点。
-   * @param data - 请求的数据。
-   * @param config - 请求的配置。
-   * @returns 返回一个 Promise，解析为 ApiResponse。
+   * 发送 POST 请求
+   * @template TResponse 预期响应类型
+   * @template T 请求体数据类型
+   * @param endpoint - 接口端点路径
+   * @param data - 请求体数据（自动序列化为 JSON）
+   * @param config - 请求配置
+   * @returns 包含响应数据的 Promise
    */
   post<TResponse, T = unknown>(endpoint: string, data?: T, config?: Omit<RequestConfig, 'data' | 'method'>) {
     return this.request<TResponse, T>(endpoint, {
@@ -142,13 +166,15 @@ export class Http {
       method: 'POST'
     })
   }
+
   /**
-   * 发送 PUT 请求。
-   *
-   * @param endpoint - 请求的端点。
-   * @param data - 请求的数据。
-   * @param config - 请求的配置。
-   * @returns 返回一个 Promise，解析为 ApiResponse。
+   * 发送 PUT 请求
+   * @template TResponse 预期响应类型
+   * @template T 请求体数据类型
+   * @param endpoint - 接口端点路径
+   * @param data - 需要更新的完整资源数据
+   * @param config - 请求配置
+   * @returns 包含更新后数据的 Promise
    */
   put<TResponse, T = unknown>(endpoint: string, data?: T, config?: Omit<RequestConfig, 'data' | 'method'>) {
     return this.request<TResponse, T>(endpoint, {
@@ -158,37 +184,49 @@ export class Http {
     })
   }
   /**
-   * 发送 DELETE 请求。
-   *
-   * @param endpoint - 请求的端点。
-   * @param config - 请求的配置。
-   * @returns 返回一个 Promise，解析为 ApiResponse。
+   * 发送 DELETE 请求
+   * @template TResponse 预期响应类型（通常为 void）
+   * @param endpoint - 需要删除的资源端点路径
+   * @param config - 请求配置
+   * @returns 包含空响应的 Promise
    */
   delete<TResponse>(endpoint: string, config?: Omit<RequestConfig, 'data' | 'method'>) {
     return this.request<TResponse>(endpoint, { ...config, method: 'DELETE' })
   }
 }
 
-// 创建实例
-// export const http = new Http(process.env.NEXT_PUBLIC_API_BASE_URL)
 
-// 使用示例:
+/**
+ * 将对象转换为 URL 查询字符串
+ * @param data - 包含查询参数的对象，支持嵌套对象和数组
+ * @returns 经过 URL 编码的查询字符串（不带问号前缀）
+ * 
+ * @example
+ * // 基本用法
+ * URLSearchParamsUtils({ name: 'John', age: 30 });
+ * // 返回 'name=John&age=30'
+ * 
+ * @example
+ * // 处理数组
+ * URLSearchParamsUtils({ ids: [1, 2], tags: ['vue', 'react'] });
+ * // 返回 'ids=1&ids=2&tags=vue&tags=react'
+ * 
+ * @example
+ * // 处理特殊字符
+ * URLSearchParamsUtils({ q: 'vue&react' });
+ * // 返回 'q=vue%26react'
+ */
+export const URLSearchParamsUtils = (data: { [key: string]: any }) => {
+  const searchParams = new URLSearchParams();
 
-/*
-interface User {
-  id: number
-  name: string
-}
+  for (const [key, value] of Object.entries(data)) {
+    // 处理数组类型
+    if (Array.isArray(value)) {
+      value.forEach(item => searchParams.append(key, item.toString()));
+    } else {
+      searchParams.append(key, value.toString());
+    }
+  }
 
-// GET 请求
-const getUser = async (id: string) => {
-  const response = await http.get<User>(`/users/${id}`)
-  return response.data
-}
-
-// POST 请求
-const createUser = async (userData: Partial<User>) => {
-  const response = await http.post<User, Partial<User>>('/users', userData)
-  return response.data
-}
-*/
+  return searchParams.toString();
+};

@@ -26,7 +26,6 @@ export const getContentDimensions = (elementId: string): Error | { width: number
       const paddingLeft = parseFloat(style.paddingLeft)
       const contentWidth = rect.width - (paddingLeft + paddingRight)
       const contentHeight = rect.height - (paddingTop + paddingBottom)
-
       return {
         width: contentWidth,
         height: contentHeight
@@ -35,7 +34,7 @@ export const getContentDimensions = (elementId: string): Error | { width: number
       return new Error('Element has no computed style' + elementId)
     }
   } else {
-    return new Error("找不到id为" +elementId + "的元素")
+    return new Error("找不到id为" + elementId + "的元素")
   }
 }
 

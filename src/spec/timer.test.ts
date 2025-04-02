@@ -1,5 +1,87 @@
-import { describe, test, expect } from 'vitest';
-import { formatChineseDateTime } from '../utils/timer';
+import { describe, test, expect, vi, beforeEach, afterEach } from 'vitest';
+import { formatChineseDateTime, TimeUpdater, TimeFormatter, Timer } from '../utils/timer';
+
+
+
+
+describe('时间更新工具', () => {
+    // 原代码报错找不到命名空间“vi”，可将类型声明改为 any 临时解决类型问题
+    let mockCallback: any;
+
+    beforeEach(() => {
+        vi.useFakeTimers();
+        mockCallback = vi.fn();
+    });
+
+    afterEach(() => {
+        vi.useRealTimers();
+    });
+
+    describe('TimeFormatter 格式化', () => {
+        test('日期格式化 YYYY-MM-DD', () => {
+            const formatter = new TimeFormatter();
+            const date = new Date(2024, 5, 15); // 2024-06-15
+            expect(formatter.formatDate(date)).toBe('2024-06-15');
+        });
+
+        test('星期格式化', () => {
+            const formatter = new TimeFormatter();
+            const date = new Date(2024, 5, 15); // 星期六
+            expect(formatter.getWeekday(date)).toBe('星期六');
+        });
+
+        test('时间格式化 HH:mm:ss', () => {
+            const formatter = new TimeFormatter();
+            const date = new Date(2024, 5, 15, 9, 5, 30);
+            expect(formatter.formatTime(date)).toBe('09:05:30');
+        });
+    });
+
+    describe('Timer 定时器', () => {
+        test('定时启动和停止', () => {
+            const timer = new Timer();
+            const callback = vi.fn();
+
+            timer.start(callback, 1000);
+            vi.advanceTimersByTime(3000);
+            timer.stop();
+
+            expect(callback).toHaveBeenCalledTimes(3);
+            vi.advanceTimersByTime(3000);
+            expect(callback).toHaveBeenCalledTimes(3); // 停止后不再触发
+        });
+    });
+
+    describe('TimeUpdater 集成测试', () => {
+        test('定期更新时间回调', () => {
+            const updater = new TimeUpdater();
+            updater.startUpdate(mockCallback);
+
+            vi.advanceTimersByTime(2500);
+            updater.stopUpdate();
+
+            expect(mockCallback).toHaveBeenCalledTimes(3); // 立即调用 + 2次间隔
+            const lastCall = mockCallback.mock.calls[0][0];
+            expect(lastCall).toEqual({
+                formattedDate: expect.stringMatching(/^\d{4}-\d{2}-\d{2}$/),
+                today: expect.stringMatching(/^星期/),
+                nowTime: expect.stringMatching(/^\d{2}:\d{2}:\d{2}$/)
+            });
+        });
+
+        test('停止更新后不再触发回调', () => {
+            const updater = new TimeUpdater();
+            updater.startUpdate(mockCallback);
+
+            vi.advanceTimersByTime(1000);
+            updater.stopUpdate();
+            vi.advanceTimersByTime(3000);
+
+            expect(mockCallback).toHaveBeenCalledTimes(2); // 立即调用 + 1次间隔
+        });
+    });
+});
+
 
 describe('日期时间格式化工具', () => {
     test('正确解析ISO格式字符串', () => {

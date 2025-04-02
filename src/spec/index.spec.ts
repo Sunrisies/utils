@@ -1,77 +1,6 @@
-import { describe, expect, test, vi, afterEach } from 'vitest';
+import { describe, expect, test, vi, afterEach, beforeEach } from 'vitest';
 import { getContentDimensions, conversionTime, genRandStr } from '../index';
 
-// describe('getContentDimensions 工具函数', () => {
-//     // 模拟 DOM 环境
-//     const mockElement = document.createElement('div');
-//     mockElement.id = 'test-element';
-//     document.body.appendChild(mockElement);
-
-//     // 清理 DOM
-//     afterEach(() => {
-//         document.body.innerHTML = '';
-//     });
-
-//     test('正常获取带 padding 的元素尺寸', () => {
-//         // 模拟元素尺寸和样式
-//         vi.spyOn(mockElement, 'getBoundingClientRect').mockImplementation(() => ({
-//             width: 200,
-//             height: 100,
-//             top: 0,
-//             left: 0,
-//             bottom: 0,
-//             right: 0,
-//             x: 0,
-//             y: 0,
-//             toJSON: () => { }
-//         }));
-
-//         Object.defineProperty(window, 'getComputedStyle', {
-//             value: () => ({
-//                 paddingTop: '10px',
-//                 paddingRight: '20px',
-//                 paddingBottom: '30px',
-//                 paddingLeft: '40px'
-//             })
-//         });
-
-//         const result = getContentDimensions('test-element');
-//         expect(result).toEqual({ width: 140, height: 60 }); // 200-(40+20)=140, 100-(10+30)=60
-//     });
-
-//     test('元素不存在时返回错误', () => {
-//         const result = getContentDimensions('non-existent-element');
-//         expect(result).toBeInstanceOf(Error);
-//         expect((result as Error).message).toContain('找不到id为');
-//     });
-
-//     test('无法获取计算样式时返回错误', () => {
-//         // 模拟无法获取计算样式的情况
-//         // 修改为返回一个空的 CSSStyleDeclaration 对象
-//         vi.spyOn(window, 'getComputedStyle').mockImplementation(() => ({
-//             paddingTop: '0px',
-//             paddingRight: '0px',
-//             paddingBottom: '0px',
-//             paddingLeft: '0px',
-//             // 这里可以根据需要添加更多 CSSStyleDeclaration 接口的属性
-//             getPropertyValue: () => '',
-//             item: () => '',
-//             length: 0,
-//             parentRule: null,
-//             cssText: '',
-//             setProperty: () => { },
-//             removeProperty: () => '',
-//             // 这里需要满足 CSSStyleDeclaration 接口的所有属性和方法，可根据实际情况补充
-//         } as unknown as CSSStyleDeclaration));
-
-//         const result = getContentDimensions('test-element');
-//         expect(result).toBeInstanceOf(Error);
-//         expect((result as Error).message).toContain('Element has no computed style');
-//     });
-// });
-
-
-// ... 已有getContentDimensions测试用例 ...
 
 describe('conversionTime 工具函数', () => {
     // 设置测试时区为北京时间
@@ -133,5 +62,59 @@ describe('genRandStr 工具函数', () => {
         const charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         // 验证生成的字符串只包含指定字符集的字符
         expect([...result].every(c => charset.includes(c))).toBe(true);
+    });
+});
+
+describe('getContentDimensions', () => {
+    // 创建测试用元素
+    beforeEach(() => {
+        document.body.innerHTML = `
+      <div id="testElement" style="
+      display:block;
+        width: 200px;
+        height: 100px;
+        padding: 10px 15px 20px 5px;
+        box-sizing: border-box;
+      ">11</div>
+    `;
+        // 手动设置 DOMRect 值
+        const element = document.getElementById('testElement')!;
+        vi.spyOn(element, 'getBoundingClientRect').mockReturnValue({
+            width: 200,
+            height: 100,
+            top: 0,
+            left: 0,
+            right: 200,
+            bottom: 100,
+            x: 0,
+            y: 0,
+            toJSON: () => null
+        });
+    });
+
+    test('正确计算内容区域尺寸', () => {
+        const result = getContentDimensions('testElement');
+        if (result instanceof Error) throw result;
+        // 验证计算结果
+        // 总宽度 200px - 左右padding(5+15=20) = 180
+        // 总高度 100px - 上下padding(10+20=30) = 70
+        expect(result.width).toBeCloseTo(180);
+        expect(result.height).toBeCloseTo(70);
+    });
+
+    test('元素不存在时返回错误', () => {
+        const result = getContentDimensions('nonExistentElement');
+        expect(result).toBeInstanceOf(Error);
+        expect((result as Error).message).toContain('找不到id为');
+    });
+
+    test('无法获取计算样式时返回错误', () => {
+        // 模拟无法获取计算样式的情况
+        const element = document.getElementById('testElement')!;
+        vi.spyOn(window, 'getComputedStyle').mockReturnValueOnce(null as any);
+
+        const result = getContentDimensions('testElement');
+        expect(result).toBeInstanceOf(Error);
+        expect((result as Error).message).toContain('has no computed style');
     });
 });
