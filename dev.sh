@@ -1,8 +1,9 @@
 #!/bin/bash
+shopt -s extglob  
 cd ./.vitepress
 zip dist dist.zip
 
 # tar -czvf dist.tar.gz dist
 
-scp dist.zip root@sunrise1024.top:/home/docs/
-ssh root@sunrise1024.top "cd /home/docs/ && rm -rf dist && tar -xzvf dist.tar.gz && rm -rf dist.tar.gz"
+scp dist.zip root@sunrise1024.top:/home/www/sunrise
+ssh root@sunrise1024.top "cd /home/www/sunrise/ && rm -rf !(dist.zip)  &&  unzip dist.zip && rm -rf dist.zip"

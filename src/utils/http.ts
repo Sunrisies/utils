@@ -1,22 +1,14 @@
 /**
- * 从指定 URL 下载文件并保存为指定文件名。
+ * 从指定 URL 下载文件并保存到本地
+ * @public
  *
- * @param url - 要下载的文件的 URL。
- * @param filename - 保存文件时的名称（包括文件扩展名）。
- * @returns 返回一个 Promise，文件下载成功时解析。
- * @throws 如果文件无法获取或下载失败，将抛出错误。
- *
+ * @param url - 文件下载地址（需符合 URL 规范）
+ * @param filename - 保存时使用的文件名（需包含扩展名）
+ * 
  * @example
  * ```typescript
- * // 下载图片
- * downloadFile('https://example.com/image.png', 'my-image.png')
- *   .then(() => console.log('图片下载成功'))
- *   .catch((error) => console.error('下载图片失败:', error));
- *
- * // 下载 PDF
- * downloadFile('https://example.com/document.pdf', 'my-document.pdf')
- *   .then(() => console.log('PDF 下载成功'))
- *   .catch((error) => console.error('下载 PDF 失败:', error));
+ * // 下载图片文件
+ * await downloadFile('https://example.com/photo.jpg', 'vacation-photo.jpg');
  * ```
  */
 export const downloadFile = async (url: string, filename: string): Promise<void> => {
@@ -64,45 +56,70 @@ export interface ApiResponse<T> {
 }
 
 /**
- * 创建一个可配置的 HTTP 客户端实例
- * @param baseURL - 基础请求路径，将自动拼接到所有请求的端点前
+ * 可配置的 HTTP 客户端实例
+ * @public
+ *
+ * @remarks
+ * 封装了常见的 HTTP 请求方法，支持自动拼接基础 URL 和请求配置
+ * 
+ * @param baseURL - 基础 URL 路径，会自动拼接到所有请求端点前
+ * 
  * @example
  * ```typescript
- * // 创建指向 GitHub API 的客户端
+ * // 创建 GitHub API 客户端
  * const http = new Http('https://api.github.com');
+ * 
+ * // 发送带认证的请求
+ * const httpWithAuth = new Http('https://api.example.com');
  * ```
  */
 export class Http {
   private readonly baseURL: string
   /**
-   * 创建一个新的 Http 实例。
-   *
-   * @param baseURL - 请求的基础 URL。
-   * @param fetch - 可选的 fetch 函数，用于发送 HTTP 请求。
-   */
+    * 创建 HTTP 客户端实例
+    * @param baseURL - 基础请求路径，将自动拼接到所有请求端点前（默认为空字符串）
+    * 
+    * @example
+    * ```typescript
+    * // 带基础路径的实例
+    * const apiClient = new Http('https://api.example.com/v1');
+    *
+    * // 使用相对路径的实例
+    * const defaultClient = new Http();
+    * ```
+    */
   constructor(baseURL: string = '') {
     this.baseURL = baseURL
   }
 
   /**
-   * 核心请求方法，封装 HTTP 请求的公共逻辑
-   * @template TResponse 响应体数据类型
-   * @template T 请求体数据类型
-   * @param endpoint - 接口端点路径（自动拼接 baseURL）
-   * @param config - 请求配置项
-   * @returns 包含标准化响应格式的 Promise
-   * @throws {Error} 当 HTTP 状态码非 2xx 时抛出错误
-   * 
+   * 执行 HTTP 请求的核心方法
+   * @public
+   *
+   * @remarks
+   * 封装了请求参数处理、响应解析和错误处理等通用逻辑，支持泛型类型参数
+   *
+   * @template TResponse - 响应结果数据类型
+   * @template T - 请求体数据类型
+   * @param endpoint - 接口端点路径（自动拼接基础 URL）
+   * @param config - 请求配置（支持自定义请求头和参数）
+   * @returns 符合<mcsymbol name="ApiResponse" filename="http.ts" path="src/utils/http.ts" startline="78" type="class"></mcsymbol>规范的响应对象
+   * @throws 当发生网络错误或 HTTP 状态码非 2xx 时抛出异常
+   *
    * @example
    * ```typescript
-   * // 自定义请求配置
-   * await http.request<User>('/users', {
+   * // 获取用户数据
+   * const response = await http.request<User[]>('/users', {
+   *   headers: { Authorization: 'Bearer token' }
+   * });
+   *
+   * // 提交表单数据
+   * await http.request<void>('/submit', {
    *   method: 'POST',
-   *   data: { name: 'John' },
-   *   headers: { 'X-Request-ID': '123' }
+   *   data: { name: 'Alice' }
    * });
    * ```
-  */
+   */
   async request<TResponse, T = unknown>(endpoint: string, config: RequestConfig<T> = {}): Promise<ApiResponse<TResponse>> {
     const { params, data, headers = {}, method = 'GET', ...rest } = config
 
@@ -135,30 +152,59 @@ export class Http {
     }
   }
   /**
-   * 发送 GET 请求
-   * @template TResponse 预期响应类型
-   * @param endpoint - 接口端点路径
-   * @param config - 请求配置（自动排除 data 属性）
-   * @returns 包含响应数据的 Promise
-   * 
+   * 发送 GET 请求获取资源
+   * @public
+   *
+   * @remarks
+   * 适用于获取集合数据或单个资源的只读操作，支持查询参数配置
+   *
+   * @template TResponse - 期望的响应数据类型
+   * @param endpoint - 接口端点路径（自动拼接基础 URL）
+   * @param config - 请求配置项（支持自定义请求头和查询参数）
+   * @returns 包含<mcsymbol name="ApiResponse" filename="http.ts" path="src/utils/http.ts" startline="78" type="class"></mcsymbol>规范的响应对象
+   *
    * @example
    * ```typescript
-   * // 获取用户列表
-   * const { data } = await http.get<User[]>('/users');
+   * // 获取分页用户列表
+   * const { data } = await http.get<PagedResponse<User>>('/users', {
+   *   params: { page: 1, size: 20 }
+   * });
+   * 
+   * // 获取单个商品详情
+   * const product = await http.get<Product>('/products/123');
    * ```
    */
   get<TResponse>(endpoint: string, config?: Omit<RequestConfig, 'data' | 'method'>) {
     return this.request<TResponse>(endpoint, { ...config, method: 'GET' })
   }
   /**
-   * 发送 POST 请求
-   * @template TResponse 预期响应类型
-   * @template T 请求体数据类型
-   * @param endpoint - 接口端点路径
-   * @param data - 请求体数据（自动序列化为 JSON）
-   * @param config - 请求配置
-   * @returns 包含响应数据的 Promise
-   */
+     * 发送 POST 请求创建资源
+     * @public
+     *
+     * @remarks
+     * 适用于创建新资源或提交表单数据，请求体会自动序列化为 JSON 格式
+     *
+     * @template TResponse - 期望的响应数据类型
+     * @template T - 请求体数据类型（默认为 unknown）
+     * @param endpoint - 接口端点路径（自动拼接基础 URL）
+     * @param data - 要提交的请求体数据
+     * @param config - 请求配置项（支持自定义请求头等参数）
+     * @returns 符合<mcsymbol name="ApiResponse" filename="http.ts" path="src/utils/http.ts" startline="78" type="class"></mcsymbol>规范的响应对象
+     *
+     * @example
+     * ```typescript
+     * // 创建新用户
+     * await http.post<User>('/users', {
+     *   name: 'Bob',
+     *   email: 'bob@example.com'
+     * });
+     *
+     * // 提交表单并获取操作结果
+     * const response = await http.post<FormResult>('/submit', formData, {
+     *   headers: { 'X-Custom-Header': 'value' }
+     * });
+     * ```
+     */
   post<TResponse, T = unknown>(endpoint: string, data?: T, config?: Omit<RequestConfig, 'data' | 'method'>) {
     return this.request<TResponse, T>(endpoint, {
       ...config,
@@ -168,14 +214,33 @@ export class Http {
   }
 
   /**
-   * 发送 PUT 请求
-   * @template TResponse 预期响应类型
-   * @template T 请求体数据类型
-   * @param endpoint - 接口端点路径
-   * @param data - 需要更新的完整资源数据
-   * @param config - 请求配置
-   * @returns 包含更新后数据的 Promise
-   */
+     * 发送 PUT 请求更新资源
+     * @public
+     *
+     * @remarks
+     * 用于替换整个资源，需要提供完整的更新数据，遵循 RESTful 规范
+     *
+     * @template TResponse - 更新后的资源数据类型
+     * @template T - 请求体数据类型（默认为 unknown）
+     * @param endpoint - 资源端点路径（自动拼接基础 URL）
+     * @param data - 要替换的完整资源数据
+     * @param config - 请求配置项（支持自定义请求头等参数）
+     * @returns 包含<mcsymbol name="ApiResponse" filename="http.ts" path="src/utils/http.ts" startline="78" type="class"></mcsymbol>规范的响应对象
+     *
+     * @example
+     * ```typescript
+     * // 更新用户信息
+     * await http.put<User>('/users/123', {
+     *   name: '更新后的姓名',
+     *   email: 'new@example.com'
+     * });
+     *
+     * // 替换系统配置
+     * const config = await http.put<SystemConfig>('/config', fullConfig, {
+     *   headers: { 'If-Match': 'version-tag' }
+     * });
+     * ```
+     */
   put<TResponse, T = unknown>(endpoint: string, data?: T, config?: Omit<RequestConfig, 'data' | 'method'>) {
     return this.request<TResponse, T>(endpoint, {
       ...config,
@@ -184,11 +249,27 @@ export class Http {
     })
   }
   /**
-   * 发送 DELETE 请求
-   * @template TResponse 预期响应类型（通常为 void）
-   * @param endpoint - 需要删除的资源端点路径
-   * @param config - 请求配置
-   * @returns 包含空响应的 Promise
+   * 发送 DELETE 请求删除资源
+   * @public
+   *
+   * @remarks
+   * 用于删除指定资源，遵循 RESTful 规范
+   *
+   * @template TResponse - 响应数据类型（通常为 void）
+   * @param endpoint - 要删除的资源端点路径（自动拼接基础 URL）
+   * @param config - 请求配置项（支持自定义请求头等参数）
+   * @returns 包含<mcsymbol name="ApiResponse" filename="http.ts" path="src/utils/http.ts" startline="78" type="class"></mcsymbol>规范的响应对象
+   *
+   * @example
+   * ```typescript
+   * // 删除用户数据
+   * await http.delete<void>('/users/123');
+   *
+   * // 带条件删除的请求
+   * await http.delete<AuditLog>('/logs/456', {
+   *   headers: { 'If-Unmodified-Since': 'Wed, 21 Oct 2022 07:28:00 GMT' }
+   * });
+   * ```
    */
   delete<TResponse>(endpoint: string, config?: Omit<RequestConfig, 'data' | 'method'>) {
     return this.request<TResponse>(endpoint, { ...config, method: 'DELETE' })
@@ -197,24 +278,26 @@ export class Http {
 
 
 /**
- * 将对象转换为 URL 查询字符串
- * @param data - 包含查询参数的对象，支持嵌套对象和数组
+ * 将请求参数对象转换为 URL 查询字符串
+ * @public
+ *
+ * @remarks
+ * 支持数组和基本类型处理，自动进行 URI 组件编码。注意嵌套对象会被转换为字符串形式（如 [object Object]），
+ * 建议使用扁平数据结构。本实现基于 URLSearchParams 标准 API，与 `qs` 等库的嵌套处理机制不同
+ *
+ * @param data - 包含查询参数的对象（支持 Record<string, any> 类型）
  * @returns 经过 URL 编码的查询字符串（不带问号前缀）
- * 
+ *
  * @example
- * // 基本用法
- * URLSearchParamsUtils({ name: 'John', age: 30 });
- * // 返回 'name=John&age=30'
- * 
+ * ```typescript
+ * // 处理嵌套对象（实际开发中应避免）
+ * URLSearchParamsUtils({ filter: { type: 'video', resolution: '1080p' } });
+ * // 返回 'filter=[object%20Object]'
+ *
  * @example
- * // 处理数组
- * URLSearchParamsUtils({ ids: [1, 2], tags: ['vue', 'react'] });
- * // 返回 'ids=1&ids=2&tags=vue&tags=react'
- * 
- * @example
- * // 处理特殊字符
- * URLSearchParamsUtils({ q: 'vue&react' });
- * // 返回 'q=vue%26react'
+ * // 处理数字和布尔值
+ * URLSearchParamsUtils({ active: true, count: 42 });
+ * // 返回 'active=true&count=42'
  */
 export const URLSearchParamsUtils = (data: { [key: string]: any }) => {
   const searchParams = new URLSearchParams();

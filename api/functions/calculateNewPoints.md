@@ -4,7 +4,7 @@
 
 > **calculateNewPoints**(`centerPoint`): \[`number`, `number`\][]
 
-计算以给定点为中心，距离为 `distance` 的四个新点的坐标
+计算以给定点为中心，在四个方向扩展指定距离的新坐标点
 
 ## 参数
 
@@ -12,31 +12,22 @@
 
 [`Point`](../type-aliases/Point.md)
 
-包含中心点纬度、经度和距离的对象
+包含中心点经纬度和距离的对象
 
 ## 返回
 
 \[`number`, `number`\][]
 
-四个新点的坐标数组，格式为 [[经度1, 纬度1], [经度2, 纬度2], ...]
-
-## 作者
-
-朝阳
+四个新点的经纬度坐标数组，按顺时针方向排列
 
 ## 示例
 
-```ts
-const centerLat = 33.4148429; // 中心点纬度
-const centerLon = 113.5930592; // 中心点经度
-const distance = 1; // 距离（米）
-const newPoints = calculateNewPoints({lon: centerLon, lat: centerLat, centerLon, distance});
-console.log(newPoints);
-// 输出结果：
-// [
-//   [113.5930699741221, 33.414842899999535], // 第一个点
-//   [113.5930592, 33.41483390678393],        // 第二个点
-//   [113.5930484258779, 33.414842899999535], // 第三个点
-//   [113.5930592, 33.41485189321607]         // 第四个点
-// ]
+```typescript
+// 在中心点周围生成四个坐标点
+const newPoints = calculateNewPoints({
+  lon: 113.5930592,
+  lat: 33.4148429,
+  distance: 1
+});
+console.log(newPoints); // 输出四个坐标数组
 ```

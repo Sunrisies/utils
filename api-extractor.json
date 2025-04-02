@@ -3,8 +3,8 @@
   "projectFolder": ".",
   "mainEntryPointFilePath": "./dist/types/index.d.ts",
   "dtsRollup": {
-    "enabled":true,
-    "untrimmedFilePath":"./dist/index.d.ts"
+    "enabled": true,
+    "untrimmedFilePath": "./dist/index.d.ts"
   },
   "apiReport": {
     "enabled": false,

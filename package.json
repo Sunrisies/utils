@@ -44,7 +44,7 @@
   "devDependencies": {
     "@commitlint/config-conventional": "^19.6.0",
     "@microsoft/api-documenter": "^7.26.2",
-    "@microsoft/api-extractor": "^7.43.1",
+    "@microsoft/api-extractor": "^7.52.2",
     "@types/inquirer": "^9.0.7",
     "@types/jest": "^29.5.14",
     "@types/jsdom": "^21.1.7",

@@ -2,9 +2,26 @@
 
 # 类: TimeUpdater
 
-TimeUpdater 类用于获取和格式化当前时间。
+时间更新管理器
 
- TimeUpdater
+## 备注
+
+提供自动更新时间数据的能力，通过回调函数传递格式化后的时间信息。
+内置定时器每秒钟更新一次时间数据，需手动调用启动/停止方法
+
+## 示例
+
+```typescript
+const updater = new TimeUpdater();
+
+// 启动时间更新
+updater.startUpdate(({ nowTime }) => {
+  console.log('当前时间:', nowTime);
+});
+
+// 停止更新时间
+updater.stopUpdate();
+```
 
 ## 构造函数
 
@@ -12,11 +29,27 @@ TimeUpdater 类用于获取和格式化当前时间。
 
 > **new TimeUpdater**(): [`TimeUpdater`](TimeUpdater.md)
 
-创建一个新的 TimeUpdater 实例。
+初始化时间更新管理器实例
 
 #### 返回
 
 [`TimeUpdater`](TimeUpdater.md)
+
+#### 备注
+
+内部自动创建 Timer 和 TimeFormatter 实例
+注意：当前实现为强耦合设计，无法配置外部依赖项
+
+#### 示例
+
+```typescript
+// 基础用法
+const updater = new TimeUpdater();
+
+@example
+// 未来可扩展的依赖注入形式（当前尚未支持）
+new TimeUpdater(customTimer, customFormatter);
+```
 
 ## 方法
 

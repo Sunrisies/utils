@@ -12,23 +12,23 @@
 
 `string`
 
-图片资源的URL。
+图片资源的URL
 
 ## 返回
 
 `Promise`\<`HTMLImageElement`\>
 
-- 返回一个Promise，该Promise在图片加载完成后解析为一个包含HTMLImageElement对象。
+返回一个Promise，该Promise在图片加载完成后解析为一个包含HTMLImageElement对象
 
 ## 示例
 
-```ts
+```typescript
 // 示例：预加载并缓存图片
 preloadAndCacheImage('https://example.com/image.jpg')
-  .then((image) => {
+  .then((image) =\> {
     console.log('图片加载成功', image);
-  })
-  .catch((error) => {
+  \})
+  .catch((error) =\> {
     console.error('图片加载失败', error);
-  });
+  \});
 ```
