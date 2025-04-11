@@ -20,6 +20,7 @@
 
 - [calculateNewPoints](functions/calculateNewPoints.md)
 - [conversionTime](functions/conversionTime.md)
+- [convertTime](functions/convertTime.md)
 - [distanceLngLat](functions/distanceLngLat.md)
 - [downloadFile](functions/downloadFile.md)
 - [formatChineseDateTime](functions/formatChineseDateTime.md)

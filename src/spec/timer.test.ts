@@ -1,5 +1,5 @@
 import { describe, test, expect, vi, beforeEach, afterEach } from 'vitest';
-import { formatChineseDateTime, TimeUpdater, TimeFormatter, Timer } from '../utils/timer';
+import { formatChineseDateTime, TimeUpdater, TimeFormatter, Timer, convertTime } from '../utils/timer';
 
 
 
@@ -110,3 +110,39 @@ describe('日期时间格式化工具', () => {
         expect(formatChineseDateTime(date)).toBe('2024年02月29日 15:30:00');
     });
 });
+
+
+describe('convertTime 时间转换函数', () => {
+    test('正确处理边界值', () => {
+        expect(convertTime(60)).toBe('1分')       // 整分钟
+        expect(convertTime(3600)).toBe('1时')      // 整小时
+        expect(convertTime(86400)).toBe('1天')     // 整天
+    })
+
+    test('组合时间单位', () => {
+        expect(convertTime(90061)).toBe('1天1时1分1秒')
+        expect(convertTime(3723)).toBe('1时2分3秒')
+    })
+
+    test('小数处理', () => {
+        expect(convertTime(45.5)).toBe('45.5秒')
+        expect(convertTime(0.005)).toBe('0.01秒')      // 四舍五入
+    })
+
+    test('错误输入处理', () => {
+        // @ts-ignore 测试类型错误
+        expect(() => convertTime('60')).toThrowError('参数必须为有效数字')
+        // @ts-ignore 测试非法值
+        expect(() => convertTime(NaN)).toThrowError()
+    })
+
+    test('短时间格式', () => {
+        expect(convertTime(59.999)).toBe('1分')    // 接近1分钟
+        expect(convertTime(119)).toBe('1分59秒')    // 接近2分钟
+    })
+    test('英文格式', () => {
+        expect(convertTime(60, 'en')).toBe('1 m')       // 整分钟
+        expect(convertTime(3600, 'en')).toBe('1 h')      // 整小时
+        expect(convertTime(86400, 'en')).toBe('1 d')     // 整天
+    })
+})

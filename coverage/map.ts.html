@@ -234,8 +234,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
@@ -275,6 +273,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
@@ -299,7 +298,6 @@
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -311,6 +309,8 @@
 <span class="cline-any cline-yes">20x</span>
 <span class="cline-any cline-yes">20x</span>
 <span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -371,26 +371,24 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * 计算两个经纬度之间的距离，并返回中心点经纬度。
+ * @public
  *
- * @param lat1 - 第一个点的纬度，范围必须在 -90 到 90 之间。
- * @param lon1 - 第一个点的经度，范围必须在 -180 到 180 之间。
- * @param lat2 - 第二个点的纬度，范围必须在 -90 到 90 之间。
- * @param lon2 - 第二个点的经度，范围必须在 -180 到 180 之间。
- * @returns 返回一个对象，其中包含：
- * - `lon`：中心点的经度。
- * - `lat`：中心点的纬度。
- * - `distance`：距离（单位：米）。
- *
- * @throws 如果输入的经纬度不在合法范围内，抛出错误。
+ * @param lat1 - 第一个点的纬度（-90 到 90 之间）
+ * @param lon1 - 第一个点的经度（-180 到 180 之间）
+ * @param lat2 - 第二个点的纬度（-90 到 90 之间）
+ * @param lon2 - 第二个点的经度（-180 到 180 之间）
+ * @returns 包含中心点坐标和距离的对象
  *
  * @example
- * // 示例：计算两个经纬度之间的距离
+ * ```typescript
+ * // 计算北京到上海的经纬度距离
  * const result = distanceLngLat(39.9042, 116.4074, 31.2304, 121.4737);
- * console.log('中心点经纬度:', { lon: result.lon, lat: result.lat });
- * console.log('距离:', result.distance, '米');
+ * console.log('中心点:', result.lon, result.lat);
+ * console.log('距离:', result.distance + '米'); 
+ * ```
  */
 export function distanceLngLat(lat1: number, lon1: number, lat2: number, lon2: number): Point {
-// 校验纬度范围
+  // 校验纬度范围
   if (lat1 &lt; -90 || lat1 &gt; 90 || lat2 &lt; -90 || lat2 &gt; 90) {
     throw new Error('纬度必须在 -90 到 90 之间')
   }
@@ -414,19 +412,20 @@ export function distanceLngLat(lat1: number, lon1: number, lat2: number, lon2: n
 &nbsp;
 /**
  * 计算两个经纬度之间的中心经纬度。
+ * @public
  *
- * @param {number} oneLon - 第一个点的经度,范围必须在 -90 到 90 之间
- * @param {number} oneLat - 第一个点的纬度,范围必须在 -180 到 180 之间
- * @param {number} twoLon - 第二个点的经度,范围必须在 -90 到 90 之间
- * @param {number} twoLat - 第二个点的纬度,范围必须在 -180 到 180 之间
- * @returns {Array&lt;number&gt;} - 返回中心点的经纬度数组。
- *
- * @version 1.0.0 - 2023-12-23
+ * @param oneLon - 第一个点的经度（-180 到 180 之间）
+ * @param oneLat - 第一个点的纬度（-90 到 90 之间）
+ * @param twoLon - 第二个点的经度（-180 到 180 之间）
+ * @param twoLat - 第二个点的纬度（-90 到 90 之间）
+ * @returns 中心点的经纬度数组 [经度, 纬度]
  *
  * @example
- * // 示例：计算两个经纬度之间的中心经纬度
- * const center = getCenterLonLat(116.4074, 39.9042, 121.4737, 31.2304)
- * console.log('中心点经纬度:', center) // 输出类似 [118.94055, 35.5693]
+ * ```typescript
+ * // 计算北京和上海之间的中心点
+ * const center = getCenterLonLat(116.4074, 39.9042, 121.4737, 31.2304);
+ * console.log('中心点经纬度:', center); // 输出 [118.94055, 35.5673]
+ * ```
  */
 export const getCenterLonLat = (oneLon: number, oneLat: number, twoLon: number, twoLat: number): [number, number] =&gt; {
   // 校验经度范围
@@ -455,46 +454,47 @@ function deg2rad(deg: number): number {
 &nbsp;
 /**
  * 将弧度转换为角度
- * @param rad - 弧度值
- *
  * @private
- *
+ * 
+ * @param rad - 需要转换的弧度值
  * @returns 对应的角度值
  */
 function rad2deg(rad: number): number {
   return rad * (180 / Math.PI)
 }
 /**
- * 表示一个点的类型，包含纬度、经度和距离
- * @typedef {Object} Point
- * @property {number} lat - 纬度
- * @property {number} lon - 经度
- * @property {number} distance - 距离
+ * 表示地理坐标点及其关联距离的类型
+ * @public
+ *
+ * @remarks
+ * 该类型用于存储具有经度、纬度坐标和关联距离值的点数据，
+ * 常见于地理空间计算场景
  */
 export type Point = {
-  lat: number // 纬度
-  lon: number // 经度
-  distance: number // 距离
+  /** 纬度坐标（-90 到 90 之间） */
+  lat: number
+  /** 经度坐标（-180 到 180 之间） */
+  lon: number
+  /** 关联的距离值（单位：米） */
+  distance: number
 }
 /**
- * 计算以给定点为中心，距离为 `distance` 的四个新点的坐标
- * @type {Point}
- * @param centerPoint  - 包含中心点纬度、经度和距离的对象
- * @returns 四个新点的坐标数组，格式为 [[经度1, 纬度1], [经度2, 纬度2], ...]
- * @author 朝阳
+ * 计算以给定点为中心，在四个方向扩展指定距离的新坐标点
+ * @public
+ *
+ * @param centerPoint - 包含中心点经纬度和距离的对象
+ * @returns 四个新点的经纬度坐标数组，按顺时针方向排列
+ *
  * @example
- * const centerLat = 33.4148429; // 中心点纬度
- * const centerLon = 113.5930592; // 中心点经度
- * const distance = 1; // 距离（米）
- * const newPoints = calculateNewPoints({lon: centerLon, lat: centerLat, centerLon, distance});
- * console.log(newPoints);
- * // 输出结果：
- * // [
- * //   [113.5930699741221, 33.414842899999535], // 第一个点
- * //   [113.5930592, 33.41483390678393],        // 第二个点
- * //   [113.5930484258779, 33.414842899999535], // 第三个点
- * //   [113.5930592, 33.41485189321607]         // 第四个点
- * // ]
+ * ```typescript
+ * // 在中心点周围生成四个坐标点
+ * const newPoints = calculateNewPoints({
+ *   lon: 113.5930592,
+ *   lat: 33.4148429,
+ *   distance: 1
+ * });
+ * console.log(newPoints); // 输出四个坐标数组
+ * ```
  */
 export const calculateNewPoints = ({ lat, lon, distance }: Point): Array&lt;[number, number]&gt; =&gt; {
   // 校验经度范围
@@ -529,7 +529,7 @@ export const calculateNewPoints = ({ lat, lon, distance }: Point): Array&lt;[num
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-04-02T05:44:14.135Z
+                at 2025-04-11T02:44:17.162Z
             </div>
         <script src="prettify.js"></script>
         <script>
