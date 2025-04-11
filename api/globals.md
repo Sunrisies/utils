@@ -28,3 +28,4 @@
 - [getContentDimensions](functions/getContentDimensions.md)
 - [preloadAndCacheImage](functions/preloadAndCacheImage.md)
 - [preloadAndCacheImages](functions/preloadAndCacheImages.md)
+- [URLSearchParamsUtils](functions/URLSearchParamsUtils.md)

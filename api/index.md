@@ -9,3 +9,4 @@ pnpm run test
 npx typedoc
 
 pnpm run docs:build
+pnpm run push

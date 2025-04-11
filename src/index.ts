@@ -2,5 +2,5 @@ export { getContentDimensions, genRandStr, GenRandStrResult } from './utils/inde
 export { TimeUpdater, UpTimeType, formatChineseDateTime, conversionTime, convertTime } from './utils/timer'
 export { distanceLngLat, calculateNewPoints, Point } from './utils/map'
 
-export { downloadFile, Http, RequestConfig, ApiResponse } from './utils/http'
+export { downloadFile, Http, RequestConfig, ApiResponse, URLSearchParamsUtils } from './utils/http'
 export { preloadAndCacheImages, preloadAndCacheImage } from './utils/images'
