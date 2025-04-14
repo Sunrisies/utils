@@ -114,19 +114,24 @@ describe('日期时间格式化工具', () => {
 
 describe('convertTime 时间转换函数', () => {
     test('正确处理边界值', () => {
-        expect(convertTime(60)).toBe('1分')       // 整分钟
-        expect(convertTime(3600)).toBe('1时')      // 整小时
-        expect(convertTime(86400)).toBe('1天')     // 整天
+        expect(convertTime(60)).toBe('1 分')       // 整分钟
+        expect(convertTime(3600)).toBe('1 时')      // 整小时
+        expect(convertTime(86400)).toBe('1 天')     // 整天
+    })
+
+    test('正确处理整数秒数', () => {
+        expect(convertTime(139.903289794922)).toBe('2 分 20 秒')    // 1分1秒
+        // expect(convertTime(3661)).toBe('1时1分1秒')  // 1时1分1秒
     })
 
     test('组合时间单位', () => {
-        expect(convertTime(90061)).toBe('1天1时1分1秒')
-        expect(convertTime(3723)).toBe('1时2分3秒')
+        expect(convertTime(90061)).toBe('1 天 1 时 1 分 1 秒')
+        expect(convertTime(3723)).toBe('1 时 2 分 3 秒')
     })
 
     test('小数处理', () => {
-        expect(convertTime(45.5)).toBe('45.5秒')
-        expect(convertTime(0.005)).toBe('0.01秒')      // 四舍五入
+        expect(convertTime(45.5)).toBe('46 秒')
+        expect(convertTime(0.005)).toBe('0 秒')      // 四舍五入
     })
 
     test('错误输入处理', () => {
@@ -137,12 +142,24 @@ describe('convertTime 时间转换函数', () => {
     })
 
     test('短时间格式', () => {
-        expect(convertTime(59.999)).toBe('1分')    // 接近1分钟
-        expect(convertTime(119)).toBe('1分59秒')    // 接近2分钟
+        expect(convertTime(59.999)).toBe('1 分')    // 接近1分钟
+        expect(convertTime(119)).toBe('1 分 59 秒')    // 接近2分钟
     })
     test('英文格式', () => {
         expect(convertTime(60, 'en')).toBe('1 m')       // 整分钟
         expect(convertTime(3600, 'en')).toBe('1 h')      // 整小时
         expect(convertTime(86400, 'en')).toBe('1 d')     // 整天
+    })
+    test("英文格式小数处理", () => {
+        expect(convertTime(45.5, 'en')).toBe('46 s')    // 1分1秒
+        expect(convertTime(0.005, 'en')).toBe('0 s')      // 四舍五入
+    })
+    test("英文格式短时间格式", () => {
+        expect(convertTime(59.999, 'en')).toBe('1 m')    // 接近1分钟
+        expect(convertTime(119, 'en')).toBe('1 m 59 s')    // 接近2分钟
+    })
+    test('英文组合时间单位', () => {
+        expect(convertTime(90061, 'en')).toBe('1 d 1 h 1 m 1 s')
+        expect(convertTime(3723, 'en')).toBe('1 h 2 m 3 s')
     })
 })

@@ -11,11 +11,15 @@ global.document = {
     removeChild: vi.fn()
   }
 } as unknown as Document
-// beforeEach(() => {
-//   console.log('-----')
-// })
+
 describe('downloadFile', () => {
   beforeEach(() => {
+    vi.spyOn(global, 'fetch').mockImplementation(async () => ({
+      ok: true,
+      headers: new Headers({ 'Content-Type': 'image/png' }),
+      blob: async () => new Blob(['mock-data']),
+      clone() { return this }
+    }) as Response);
     // 每个测试之前重置模拟
     vi.spyOn(URL, 'createObjectURL').mockImplementation(() => 'mocked-url')
     vi.spyOn(URL, 'revokeObjectURL').mockImplementation(() => { })
@@ -29,15 +33,20 @@ describe('downloadFile', () => {
   })
 
 
-  it('应成功下载文件', async () => {
+  it('下载图片', async () => {
     // 模拟 fetch 响应
     const mockResponse = {
       ok: true,
-      blob: vi.fn().mockResolvedValue(new Blob(['test content'], { type: 'text/plain' }))
+      headers: new Headers({
+        'content-type': 'image/png', // 明确测试图片类型
+        'content-disposition': 'attachment'
+      }),
+      blob: vi.fn().mockResolvedValue(new Blob(['test content'])),
+      clone: function () { return this }
     }
     vi.stubGlobal('fetch', vi.fn().mockResolvedValue(mockResponse))
 
-    await downloadFile('http://example.com/file', 'test.txt')
+    await downloadFile('https://vip.chaoyang1024.top/img/js.png', 'js.png')
 
     expect(URL.createObjectURL).toHaveBeenCalled()
     expect(document.createElement).toHaveBeenCalled()

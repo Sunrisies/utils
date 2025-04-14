@@ -18,7 +18,15 @@ export const downloadFile = async (url: string, filename: string): Promise<void>
     if (!response.ok) {
       throw new Error(`无法获取文件: ${response.statusText}`)
     }
-
+    console.log(response, 'response')
+    // 新增内容类型校验
+    const contentType = response.headers.get('content-type')
+    console.log(contentType, 'contentType')
+    if (!contentType?.startsWith('application/octet-stream') &&
+      !contentType?.includes('application/zip') &&
+      !contentType?.startsWith('image/')) {
+      throw new Error('下载失败：服务器返回非文件类型内容')
+    }
     // 将文件内容转换为 Blob
     const blob = await response.blob()
 
@@ -40,8 +48,6 @@ export const downloadFile = async (url: string, filename: string): Promise<void>
     throw error // 抛出错误以便调用方处理
   }
 }
-
-
 
 export interface RequestConfig<T = unknown> extends Omit<RequestInit, 'body'> {
   params?: Record<string, string>

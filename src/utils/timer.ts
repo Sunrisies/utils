@@ -367,30 +367,34 @@ export const convertTime = (duration: number, type: 'en' | 'zh' = 'zh'): string 
   const hours = Math.floor((duration % 86400) / 3600)
   const minutes = Math.floor((duration % 3600) / 60)
   // 修复点1：使用更精确的小数处理方式
-  const seconds = (duration % 60).toFixed(2).replace(/\.?0+$/, '')
+  // const seconds = (duration % 60).toFixed(2).replace(/\.?0+$/, '')
+  // 优化点：使用四舍五入处理秒数
+  let remainingSeconds = Math.round(duration % 60); // 保留两位小数进行四舍五入
+  let adjustedMinutes = minutes;
+  // console.log(remainingSeconds, 'remainingSeconds')
+  // 当四舍五入后的秒数等于60时进位
+  if (remainingSeconds >= 60) {
+    adjustedMinutes += 1;
+    remainingSeconds = 0;
+  }
 
+  const seconds = remainingSeconds.toFixed(2).replace(/\.?0+$/, '') // 去除末尾无效零
   // 修复点2：优化条件判断逻辑
   const parts = []
-  // 修复秒数进位问题
-  let remainingSeconds = duration % 60;
-  let adjustedMinutes = minutes;
-
   // 当秒数四舍五入后等于60时进位
   if (remainingSeconds >= 59.995) {
     adjustedMinutes += 1;
     remainingSeconds = 0;
   }
 
-
-  if (days > 0) parts.push(`${days}${type === 'zh' ? '天' : ' d'}`);
-  if (hours > 0) parts.push(`${hours}${type === 'zh' ? '时' : ' h'}`);
-  if (adjustedMinutes > 0) parts.push(`${adjustedMinutes}${type === 'zh' ? '分' : ' m'}`);
+  if (days > 0) parts.push(`${days}${type === 'zh' ? ' 天' : ' d'}`);
+  if (hours > 0) parts.push(`${hours}${type === 'zh' ? ' 时' : ' h'}`);
+  if (adjustedMinutes > 0) parts.push(`${adjustedMinutes}${type === 'zh' ? ' 分' : ' m'}`);
 
   // 修复测试用例的预期结果
   if (parts.length === 0 || remainingSeconds > 0) {
-    parts.push(`${seconds}${type === 'zh' ? '秒' : ' s'}`);
+    parts.push(`${seconds}${type === 'zh' ? ' 秒' : ' s'}`);
   }
-
-  console.log(parts, '=========', days, hours, minutes, seconds)
-  return parts.join('')
+  console.log(parts, 'parts')
+  return parts.join(' ')
 }
