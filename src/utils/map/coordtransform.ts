@@ -13,7 +13,7 @@ const ee = 0.00669342162296594323;
  * @param lat
  * @returns {*[]}
  */
-export function wgs84togcj02(lng: number, lat: number) {
+export const wgs84togcj02 = (lng: number, lat: number) => {
     if (out_of_china(lng, lat)) {
         return [lng, lat]
     }
@@ -40,7 +40,7 @@ console.log(data)
  * @param lat
  * @returns {*[]}
  */
-export function gcj02towgs84(lng: number, lat: number) {
+export const gcj02towgs84 = (lng: number, lat: number) => {
     var lat = +lat;
     var lng = +lng;
     if (out_of_china(lng, lat)) {
@@ -61,7 +61,7 @@ export function gcj02towgs84(lng: number, lat: number) {
 }
 const la = gcj02towgs84(114.1808934593, 22.322230460245)
 console.log(la)
-function transformlat(lng: number, lat: number) {
+const transformlat = (lng: number, lat: number) => {
     var ret = -100.0 + 2.0 * lng + 3.0 * lat + 0.2 * lat * lat + 0.1 * lng * lat + 0.2 * Math.sqrt(Math.abs(lng));
     ret += (20.0 * Math.sin(6.0 * lng * PI) + 20.0 * Math.sin(2.0 * lng * PI)) * 2.0 / 3.0;
     ret += (20.0 * Math.sin(lat * PI) + 40.0 * Math.sin(lat / 3.0 * PI)) * 2.0 / 3.0;
@@ -69,7 +69,7 @@ function transformlat(lng: number, lat: number) {
     return ret
 }
 
-export function transformlng(lng: number, lat: number) {
+const transformlng = (lng: number, lat: number) => {
     var ret = 300.0 + lng + 2.0 * lat + 0.1 * lng * lng + 0.1 * lng * lat + 0.1 * Math.sqrt(Math.abs(lng));
     ret += (20.0 * Math.sin(6.0 * lng * PI) + 20.0 * Math.sin(2.0 * lng * PI)) * 2.0 / 3.0;
     ret += (20.0 * Math.sin(lng * PI) + 40.0 * Math.sin(lng / 3.0 * PI)) * 2.0 / 3.0;
@@ -83,6 +83,6 @@ export function transformlng(lng: number, lat: number) {
  * @param lat
  * @returns {boolean}
  */
-function out_of_china(lng: number, lat: number) {
+export const out_of_china = (lng: number, lat: number) => {
     return (lng < 72.004 || lng > 137.8347) || ((lat < 0.8293 || lat > 55.8271) || false);
 }
