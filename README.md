@@ -2,7 +2,7 @@
 
 pnpm run start:dev
 
-pnpm run dev:tsc
+pnpm run tsc
 
 pnpm run test
 

@@ -1,6 +1,6 @@
 {
   "name": "sunrise-utils",
-  "version": "1.0.25",
+  "version": "1.0.26",
   "description": "一个使用esbuild进行本地开发的工具库， 包含了一些常用的工具函数，主要是使用在浏览器环境",
   "main": "dist/index.esm.js",
   "module": "dist/index.esm.js",
@@ -11,6 +11,7 @@
   ],
   "scripts": {
     "push": "node ./publish.js",
+    "tsc": "tsc",
     "dev:tsc": "tsc -w",
     "build:dev": "cross-env NODE_ENV=development rollup -c",
     "build:prod": "cross-env NODE_ENV=production rollup -c",

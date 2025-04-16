@@ -395,6 +395,5 @@ export const convertTime = (duration: number, type: 'en' | 'zh' = 'zh'): string 
   if (parts.length === 0 || remainingSeconds > 0) {
     parts.push(`${seconds}${type === 'zh' ? ' 秒' : ' s'}`);
   }
-  console.log(parts, 'parts')
   return parts.join(' ')
 }

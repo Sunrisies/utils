@@ -18,10 +18,8 @@ export const downloadFile = async (url: string, filename: string): Promise<void>
     if (!response.ok) {
       throw new Error(`无法获取文件: ${response.statusText}`)
     }
-    console.log(response, 'response')
     // 新增内容类型校验
     const contentType = response.headers.get('content-type')
-    console.log(contentType, 'contentType')
     if (!contentType?.startsWith('application/octet-stream') &&
       !contentType?.includes('application/zip') &&
       !contentType?.startsWith('image/')) {
