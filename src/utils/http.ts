@@ -289,7 +289,7 @@ export class Http {
  * 支持数组和基本类型处理，自动进行 URI 组件编码。注意嵌套对象会被转换为字符串形式（如 [object Object]），
  * 建议使用扁平数据结构。本实现基于 URLSearchParams 标准 API，与 `qs` 等库的嵌套处理机制不同
  *
- * @param data - 包含查询参数的对象（支持 Record<string, any> 类型）
+ * @param data - 包含查询参数的对象（支持 Record&lt;string, any&gt; 类型）
  * @returns 经过 URL 编码的查询字符串（不带问号前缀）
  *
  * @example
@@ -297,11 +297,14 @@ export class Http {
  * // 处理嵌套对象（实际开发中应避免）
  * URLSearchParamsUtils({ filter: { type: 'video', resolution: '1080p' } });
  * // 返回 'filter=[object%20Object]'
+ * ```
  *
  * @example
+ * ```typescript
  * // 处理数字和布尔值
  * URLSearchParamsUtils({ active: true, count: 42 });
  * // 返回 'active=true&count=42'
+ * ```
  */
 export const URLSearchParamsUtils = (data: { [key: string]: any }) => {
   const searchParams = new URLSearchParams();

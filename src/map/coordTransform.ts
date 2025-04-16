@@ -1,11 +1,25 @@
 /**
- * 国家测量局坐标（火星坐标，GCJ02）与WGS84坐标系之间的转换
+ * 国家测量局坐标（火星坐标，GCJ02）与WGS84坐标系之间的转换工具
+ * @packageDocumentation
+ * @remarks
+ * 实现WGS84坐标系与GCJ02坐标系之间的双向转换算法，包含：
+ * - 中国境内坐标偏移计算
+ * - 坐标边界校验
+ * - 参数有效性验证
+ * 
+ * 注意：转换算法基于国家测绘局公开的偏移参数，不可用于高精度测绘场景
  */
 const x_PI = 3.14159265358979324 * 3000.0 / 180.0;
 const PI = 3.1415926535897932384626;
 const a = 6378245.0;
 const ee = 0.00669342162296594323;
-// 新增参数校验装饰器
+
+/**
+ * 坐标校验装饰器工厂函数
+ * @param min - 坐标最小值
+ * @param max - 坐标最大值
+ * @returns 方法装饰器
+ */
 function validateCoordinates(min: number, max: number) {
     return function (target: any, key: string, descriptor: PropertyDescriptor) {
         const originalMethod = descriptor.value;
@@ -22,10 +36,18 @@ function validateCoordinates(min: number, max: number) {
     }
 }
 /**
- * 如果你不在国内，判断你是否在国内
- * @param lng
- * @param lat
- * @returns {boolean}
+ * 判断坐标是否在中国境外
+ * @param lng - 经度（WGS84坐标系）
+ * @param lat - 纬度（WGS84坐标系）
+ * @returns 是否在境外（true表示境外坐标，不进行转换）
+ * 
+ * @example
+ * ```typescript
+ * // 境外坐标示例
+ * out_of_china(135.0, 35.0) // true
+ * // 境内坐标示例 
+ * out_of_china(116.4074, 39.9042) // false
+ * ```
  */
 export const out_of_china = (lng: number, lat: number) => {
     return (lng < 72.004 || lng > 137.8347) || ((lat < 0.8293 || lat > 55.8271) || false);
@@ -125,8 +147,5 @@ class CoordinateTransform {
 }
 export const wgs84ToGcj02 = CoordinateTransform.wgs84ToGcj02;
 export const gcj02ToWgs84 = CoordinateTransform.gcj02ToWgs84;
-
-
-
 
 
