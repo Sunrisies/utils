@@ -4,7 +4,7 @@
 
 > **out\_of\_china**(`lng`, `lat`): `boolean`
 
-如果你不在国内，判断你是否在国内
+判断坐标是否在中国境外
 
 ## 参数
 
@@ -12,10 +12,25 @@
 
 `number`
 
+经度（WGS84坐标系）
+
 ### lat
 
 `number`
 
+纬度（WGS84坐标系）
+
 ## 返回
 
 `boolean`
+
+是否在境外（true表示境外坐标，不进行转换）
+
+## 示例
+
+```typescript
+// 境外坐标示例
+out_of_china(135.0, 35.0) // true
+// 境内坐标示例 
+out_of_china(116.4074, 39.9042) // false
+```
