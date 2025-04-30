@@ -23,6 +23,7 @@
 - [convertTime](functions/convertTime.md)
 - [distanceLngLat](functions/distanceLngLat.md)
 - [downloadFile](functions/downloadFile.md)
+- [formatBytes](functions/formatBytes.md)
 - [formatChineseDateTime](functions/formatChineseDateTime.md)
 - [gcj02ToWgs84](functions/gcj02ToWgs84.md)
 - [genRandStr](functions/genRandStr.md)
