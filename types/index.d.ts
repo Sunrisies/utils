@@ -2,5 +2,6 @@ export { getContentDimensions, genRandStr, GenRandStrResult } from './utils/inde
 export { TimeUpdater, UpTimeType, formatChineseDateTime, conversionTime, convertTime } from './utils/timer';
 export * from './map/index';
 export { formatBytes } from './utils/format';
+export * from './utils/date';
 export { downloadFile, Http, RequestConfig, ApiResponse, URLSearchParamsUtils } from './utils/http';
 export { preloadAndCacheImages, preloadAndCacheImage } from './utils/images';

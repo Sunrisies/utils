@@ -8,6 +8,7 @@
 ## 接口
 
 - [ApiResponse](interfaces/ApiResponse.md)
+- [RelativeTimeOptions](interfaces/RelativeTimeOptions.md)
 - [RequestConfig](interfaces/RequestConfig.md)
 
 ## 类型别名
@@ -29,6 +30,7 @@
 - [genRandStr](functions/genRandStr.md)
 - [getCenterLonLat](functions/getCenterLonLat.md)
 - [getContentDimensions](functions/getContentDimensions.md)
+- [getRelativeTime](functions/getRelativeTime.md)
 - [out\_of\_china](functions/out_of_china.md)
 - [preloadAndCacheImage](functions/preloadAndCacheImage.md)
 - [preloadAndCacheImages](functions/preloadAndCacheImages.md)
