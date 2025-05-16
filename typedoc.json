@@ -1,7 +1,16 @@
 {
   "$schema": "https://typedoc.org/schema.json",
-  "entryPoints": ["./src/"],
-  "plugin": ["typedoc-plugin-markdown", "typedoc-vitepress-theme"],
+  "entryPoints": [
+    "./src/"
+  ],
+  "exclude": [
+    "**/README.md",
+    "README.md"
+  ],
+  "plugin": [
+    "typedoc-plugin-markdown",
+    "typedoc-vitepress-theme"
+  ],
   "lang": "zh",
   "sidebar": {
     "autoConfiguration": true,
@@ -9,5 +18,12 @@
     "pretty": false,
     "collapsed": true
   },
-  "disableSources": true // 禁用源码
+  "disableSources": true, // 禁用源码
+  "entryPointStrategy": "expand",
+  "excludeInternal": true,
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "sort": [
+    "source-order"
+  ],
 }

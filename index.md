@@ -17,6 +17,7 @@ hero:
     - text: 开始使用
       link: /api/functions/calculateNewPoints.html
     - text: 快速上手
+      link: /guide/quick-start.html
 features:
   - icon: ⚡️
     title: 功能

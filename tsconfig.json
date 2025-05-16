@@ -26,7 +26,8 @@
     "emitDecoratorMetadata": true
   },
   "include": [
-    "./src/**/*"
+    "./src/**/*",
+    "./types/**/*"
   ], // 包含的目录或文件列表  
   "exclude": [
     "node_modules",
