@@ -6,11 +6,11 @@
 
 # utils
 
-## Type Aliases
+## 类型别名
 
 - [GenRandStrResult](type-aliases/GenRandStrResult.md)
 
-## Functions
+## 函数
 
 - [getContentDimensions](functions/getContentDimensions.md)
 - [genRandStr](functions/genRandStr.md)

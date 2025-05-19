@@ -4,13 +4,13 @@
 
 [sunrise-utils](../../../modules.md) / [utils/format](../README.md) / formatBytes
 
-# Function: formatBytes()
+# 函数: formatBytes()
 
 > **formatBytes**(`bytes`, `options?`): `string`
 
 文件大小格式化工具
 
-## Parameters
+## 参数
 
 ### bytes
 
@@ -66,13 +66,13 @@
 
 `string`
 
-## Returns
+## 返回
 
 `string`
 
 格式化后的文件大小字符串
 
-## Remarks
+## 备注
 
 智能格式化文件大小，支持以下特性：
 - 支持二进制（1024）和十进制（1000）计算方式
@@ -81,15 +81,15 @@
 - 支持自定义单位系统
 - 处理极限值和边界情况
 
-## Throws
+## 抛出
 
 当输入参数无效时抛出
 
-## Throws
+## 抛出
 
 当输入值超出范围时抛出
 
-## Example
+## 示例
 
 ```typescript
 // 基本用法

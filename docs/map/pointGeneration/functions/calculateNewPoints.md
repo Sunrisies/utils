@@ -4,13 +4,13 @@
 
 [sunrise-utils](../../../modules.md) / [map/pointGeneration](../README.md) / calculateNewPoints
 
-# Function: calculateNewPoints()
+# 函数: calculateNewPoints()
 
 > **calculateNewPoints**(`centerPoint`): \[`number`, `number`\][]
 
 计算以给定点为中心，在四个方向扩展指定距离的新坐标点
 
-## Parameters
+## 参数
 
 ### centerPoint
 
@@ -18,13 +18,13 @@
 
 包含中心点经纬度和距离的对象
 
-## Returns
+## 返回
 
 \[`number`, `number`\][]
 
 四个新点的经纬度坐标数组，按顺时针方向排列
 
-## Example
+## 示例
 
 ```typescript
 // 在中心点周围生成四个坐标点

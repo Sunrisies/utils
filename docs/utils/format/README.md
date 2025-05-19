@@ -6,6 +6,6 @@
 
 # utils/format
 
-## Functions
+## 函数
 
 - [formatBytes](functions/formatBytes.md)

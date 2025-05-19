@@ -4,13 +4,13 @@
 
 [sunrise-utils](../../../modules.md) / [map/coordTransform](../README.md) / gcj02ToWgs84
 
-# Variable: gcj02ToWgs84()
+# 变量: gcj02ToWgs84()
 
 > `const` **gcj02ToWgs84**: (`lng`, `lat`) => \[`number`, `number`\] = `CoordinateTransform.gcj02ToWgs84`
 
 将GCJ02火星坐标系转换为WGS84坐标系
 
-## Parameters
+## 参数
 
 ### lng
 
@@ -24,13 +24,13 @@ GCJ02经度，范围-180到180
 
 GCJ02纬度，范围-90到90
 
-## Returns
+## 返回
 
 \[`number`, `number`\]
 
 [经度, 纬度] 格式的WGS84坐标数组
 
-## Example
+## 示例
 
 ```typescript
 const [wgsLng, wgsLat] = gcj02ToWgs84(114.123, 22.456)

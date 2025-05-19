@@ -6,6 +6,6 @@
 
 # map/coordinates
 
-## Functions
+## 函数
 
 - [getCenterLonLat](functions/getCenterLonLat.md)

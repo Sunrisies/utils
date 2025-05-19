@@ -4,19 +4,19 @@
 
 [sunrise-utils](../../../modules.md) / [utils/http](../README.md) / Http
 
-# Class: Http
+# 类: Http
 
 可配置的 HTTP 客户端实例
 
-## Remarks
+## 备注
 
 封装了常见的 HTTP 请求方法，支持自动拼接基础 URL 和请求配置
 
-## Param
+## 参数
 
 基础 URL 路径，会自动拼接到所有请求端点前
 
-## Example
+## 示例
 
 ```typescript
 // 创建 GitHub API 客户端
@@ -26,15 +26,15 @@ const http = new Http('https://api.github.com');
 const httpWithAuth = new Http('https://api.example.com');
 ```
 
-## Constructors
+## 构造函数
 
-### Constructor
+### 构造函数
 
 > **new Http**(`baseURL`): `Http`
 
 创建 HTTP 客户端实例
 
-#### Parameters
+#### 参数
 
 ##### baseURL
 
@@ -42,11 +42,11 @@ const httpWithAuth = new Http('https://api.example.com');
 
 基础请求路径，将自动拼接到所有请求端点前（默认为空字符串）
 
-#### Returns
+#### 返回
 
 `Http`
 
-#### Example
+#### 示例
 
 ```typescript
 // 带基础路径的实例
@@ -56,7 +56,7 @@ const apiClient = new Http('https://api.example.com/v1');
 const defaultClient = new Http();
 ```
 
-## Methods
+## 方法
 
 ### request()
 
@@ -64,7 +64,7 @@ const defaultClient = new Http();
 
 执行 HTTP 请求的核心方法
 
-#### Type Parameters
+#### 类型参数
 
 ##### TResponse
 
@@ -78,7 +78,7 @@ const defaultClient = new Http();
 
 请求体数据类型
 
-#### Parameters
+#### 参数
 
 ##### endpoint
 
@@ -92,21 +92,21 @@ const defaultClient = new Http();
 
 请求配置（支持自定义请求头和参数）
 
-#### Returns
+#### 返回
 
 `Promise`\<[`ApiResponse`](../interfaces/ApiResponse.md)\<`TResponse`\>\>
 
 符合<mcsymbol name="ApiResponse" filename="http.ts" path="src/utils/http.ts" startline="78" type="class"></mcsymbol>规范的响应对象
 
-#### Remarks
+#### 备注
 
 封装了请求参数处理、响应解析和错误处理等通用逻辑，支持泛型类型参数
 
-#### Throws
+#### 抛出
 
 当发生网络错误或 HTTP 状态码非 2xx 时抛出异常
 
-#### Example
+#### 示例
 
 ```typescript
 // 获取用户数据
@@ -129,7 +129,7 @@ await http.request<void>('/submit', {
 
 发送 GET 请求获取资源
 
-#### Type Parameters
+#### 类型参数
 
 ##### TResponse
 
@@ -137,7 +137,7 @@ await http.request<void>('/submit', {
 
 期望的响应数据类型
 
-#### Parameters
+#### 参数
 
 ##### endpoint
 
@@ -151,17 +151,17 @@ await http.request<void>('/submit', {
 
 请求配置项（支持自定义请求头和查询参数）
 
-#### Returns
+#### 返回
 
 `Promise`\<[`ApiResponse`](../interfaces/ApiResponse.md)\<`TResponse`\>\>
 
 包含<mcsymbol name="ApiResponse" filename="http.ts" path="src/utils/http.ts" startline="78" type="class"></mcsymbol>规范的响应对象
 
-#### Remarks
+#### 备注
 
 适用于获取集合数据或单个资源的只读操作，支持查询参数配置
 
-#### Example
+#### 示例
 
 ```typescript
 // 获取分页用户列表
@@ -181,7 +181,7 @@ const product = await http.get<Product>('/products/123');
 
 发送 POST 请求创建资源
 
-#### Type Parameters
+#### 类型参数
 
 ##### TResponse
 
@@ -195,7 +195,7 @@ const product = await http.get<Product>('/products/123');
 
 请求体数据类型（默认为 unknown）
 
-#### Parameters
+#### 参数
 
 ##### endpoint
 
@@ -215,17 +215,17 @@ const product = await http.get<Product>('/products/123');
 
 请求配置项（支持自定义请求头等参数）
 
-#### Returns
+#### 返回
 
 `Promise`\<[`ApiResponse`](../interfaces/ApiResponse.md)\<`TResponse`\>\>
 
 符合<mcsymbol name="ApiResponse" filename="http.ts" path="src/utils/http.ts" startline="78" type="class"></mcsymbol>规范的响应对象
 
-#### Remarks
+#### 备注
 
 适用于创建新资源或提交表单数据，请求体会自动序列化为 JSON 格式
 
-#### Example
+#### 示例
 
 ```typescript
 // 创建新用户
@@ -248,7 +248,7 @@ const response = await http.post<FormResult>('/submit', formData, {
 
 发送 PUT 请求更新资源
 
-#### Type Parameters
+#### 类型参数
 
 ##### TResponse
 
@@ -262,7 +262,7 @@ const response = await http.post<FormResult>('/submit', formData, {
 
 请求体数据类型（默认为 unknown）
 
-#### Parameters
+#### 参数
 
 ##### endpoint
 
@@ -282,17 +282,17 @@ const response = await http.post<FormResult>('/submit', formData, {
 
 请求配置项（支持自定义请求头等参数）
 
-#### Returns
+#### 返回
 
 `Promise`\<[`ApiResponse`](../interfaces/ApiResponse.md)\<`TResponse`\>\>
 
 包含<mcsymbol name="ApiResponse" filename="http.ts" path="src/utils/http.ts" startline="78" type="class"></mcsymbol>规范的响应对象
 
-#### Remarks
+#### 备注
 
 用于替换整个资源，需要提供完整的更新数据，遵循 RESTful 规范
 
-#### Example
+#### 示例
 
 ```typescript
 // 更新用户信息
@@ -315,7 +315,7 @@ const config = await http.put<SystemConfig>('/config', fullConfig, {
 
 发送 DELETE 请求删除资源
 
-#### Type Parameters
+#### 类型参数
 
 ##### TResponse
 
@@ -323,7 +323,7 @@ const config = await http.put<SystemConfig>('/config', fullConfig, {
 
 响应数据类型（通常为 void）
 
-#### Parameters
+#### 参数
 
 ##### endpoint
 
@@ -337,17 +337,17 @@ const config = await http.put<SystemConfig>('/config', fullConfig, {
 
 请求配置项（支持自定义请求头等参数）
 
-#### Returns
+#### 返回
 
 `Promise`\<[`ApiResponse`](../interfaces/ApiResponse.md)\<`TResponse`\>\>
 
 包含<mcsymbol name="ApiResponse" filename="http.ts" path="src/utils/http.ts" startline="78" type="class"></mcsymbol>规范的响应对象
 
-#### Remarks
+#### 备注
 
 用于删除指定资源，遵循 RESTful 规范
 
-#### Example
+#### 示例
 
 ```typescript
 // 删除用户数据

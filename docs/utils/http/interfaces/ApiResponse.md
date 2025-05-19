@@ -4,15 +4,15 @@
 
 [sunrise-utils](../../../modules.md) / [utils/http](../README.md) / ApiResponse
 
-# Interface: ApiResponse\<T\>
+# 接口: ApiResponse\<T\>
 
-## Type Parameters
+## 类型参数
 
 ### T
 
 `T`
 
-## Properties
+## 属性
 
 ### code
 

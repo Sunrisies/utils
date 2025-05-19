@@ -4,13 +4,13 @@
 
 [sunrise-utils](../../../modules.md) / [utils/timer](../README.md) / convertTime
 
-# Function: convertTime()
+# 函数: convertTime()
 
 > **convertTime**(`duration`, `type`): `string`
 
 将秒数转换为易读的时长字符串
 
-## Parameters
+## 参数
 
 ### duration
 
@@ -22,18 +22,18 @@
 
 `"en"` | `"zh"`
 
-## Returns
+## 返回
 
 `string`
 
 格式化后的时长字符串（示例：3天2小时5分 / 45.30秒）
 
-## Remarks
+## 备注
 
 支持从秒到天的单位转换，自动选择最合适的单位组合
 注意：超过24小时会显示天数，超过60分钟显示小时，以此类推
 
-## Throws
+## 抛出
 
 当参数不是数字类型时抛出错误
 

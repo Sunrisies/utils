@@ -6,10 +6,10 @@
 
 # utils/date
 
-## Interfaces
+## 接口
 
 - [RelativeTimeOptions](interfaces/RelativeTimeOptions.md)
 
-## Functions
+## 函数
 
 - [getRelativeTime](functions/getRelativeTime.md)

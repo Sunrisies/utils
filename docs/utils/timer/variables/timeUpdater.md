@@ -4,6 +4,6 @@
 
 [sunrise-utils](../../../modules.md) / [utils/timer](../README.md) / timeUpdater
 
-# Variable: timeUpdater
+# 变量: timeUpdater
 
 > `const` **timeUpdater**: [`TimeUpdater`](../classes/TimeUpdater.md)

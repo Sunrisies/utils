@@ -4,18 +4,18 @@
 
 [sunrise-utils](../../../modules.md) / [map/types](../README.md) / Point
 
-# Type Alias: Point
+# 类型别名: Point
 
 > **Point** = `object`
 
 表示地理坐标点及其关联距离的类型
 
-## Remarks
+## 备注
 
 该类型用于存储具有经度、纬度坐标和关联距离值的点数据，
 常见于地理空间计算场景
 
-## Properties
+## 属性
 
 ### lat
 

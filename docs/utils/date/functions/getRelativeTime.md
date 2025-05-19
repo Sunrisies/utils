@@ -4,13 +4,13 @@
 
 [sunrise-utils](../../../modules.md) / [utils/date](../README.md) / getRelativeTime
 
-# Function: getRelativeTime()
+# 函数: getRelativeTime()
 
 > **getRelativeTime**(`date`, `options?`): `string`
 
 相对时间描述工具
 
-## Parameters
+## 参数
 
 ### date
 
@@ -24,13 +24,13 @@
 
 格式化配置选项对象
 
-## Returns
+## 返回
 
 `string`
 
 格式化后的相对时间描述字符串
 
-## Remarks
+## 备注
 
 智能格式化相对时间，支持以下特性：
 - 支持多种时间单位（秒、分、时、天、周、月、年）
@@ -38,11 +38,11 @@
 - 支持未来时间和过去时间
 - 支持自定义文案
 
-## Throws
+## 抛出
 
 当输入的日期参数无效时抛出
 
-## Example
+## 示例
 
 ```typescript
 // 基本用法（中文）

@@ -4,13 +4,13 @@
 
 [sunrise-utils](../../../modules.md) / [map/distance](../README.md) / distanceLngLat
 
-# Function: distanceLngLat()
+# 函数: distanceLngLat()
 
 > **distanceLngLat**(`lat1`, `lon1`, `lat2`, `lon2`): [`Point`](../../types/type-aliases/Point.md)
 
 计算两个经纬度之间的距离，并返回中心点经纬度。
 
-## Parameters
+## 参数
 
 ### lat1
 
@@ -36,13 +36,13 @@
 
 第二个点的经度（-180 到 180 之间）
 
-## Returns
+## 返回
 
 [`Point`](../../types/type-aliases/Point.md)
 
 包含中心点坐标和距离的对象
 
-## Example
+## 示例
 
 ```typescript
 // 计算北京到上海的经纬度距离

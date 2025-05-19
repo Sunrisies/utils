@@ -4,16 +4,16 @@
 
 [sunrise-utils](../../../modules.md) / [utils/timer](../README.md) / Timer
 
-# Class: Timer
+# 类: Timer
 
 定时器控制器
 
-## Remarks
+## 备注
 
 提供定时任务管理能力，支持设置任意间隔时间的周期性回调。
 基于浏览器原生 setInterval 实现，使用后需手动调用停止方法释放资源
 
-## Example
+## 示例
 
 ```typescript
 const timer = new Timer();
@@ -27,17 +27,17 @@ timer.start(() => {
 timer.stop();
 ```
 
-## Constructors
+## 构造函数
 
-### Constructor
+### 构造函数
 
 > **new Timer**(): `Timer`
 
-#### Returns
+#### 返回
 
 `Timer`
 
-## Methods
+## 方法
 
 ### start()
 
@@ -45,7 +45,7 @@ timer.stop();
 
 启动定时任务
 
-#### Parameters
+#### 参数
 
 ##### callback
 
@@ -59,16 +59,16 @@ timer.stop();
 
 执行间隔（单位：毫秒，最小值 10ms）
 
-#### Returns
+#### 返回
 
 `void`
 
-#### Remarks
+#### 备注
 
 该方法会创建周期性定时器，重复执行回调函数直到主动停止
 注意：多次调用需先停止前次定时器，避免内存泄漏
 
-#### Example
+#### 示例
 
 ```typescript
 const timer = new Timer();
@@ -85,16 +85,16 @@ timer.start(() => {
 
 停止定时任务并释放资源
 
-#### Returns
+#### 返回
 
 `void`
 
-#### Remarks
+#### 备注
 
 安全终止当前活动的定时器，清除内部定时器引用
 注意：无活动定时器时调用不会产生副作用
 
-#### Example
+#### 示例
 
 ```typescript
 const timer = new Timer();

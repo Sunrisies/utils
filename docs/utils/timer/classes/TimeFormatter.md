@@ -4,16 +4,16 @@
 
 [sunrise-utils](../../../modules.md) / [utils/timer](../README.md) / TimeFormatter
 
-# Class: TimeFormatter
+# 类: TimeFormatter
 
 日期时间格式化工具类
 
-## Remarks
+## 备注
 
 提供标准日期格式、星期计算、时间格式化等功能，所有方法均为纯函数。
 注意：月份计算会自动加 1（Date 对象月份从 0 开始计数）
 
-## Example
+## 示例
 
 ```typescript
 const formatter = new TimeFormatter();
@@ -24,17 +24,17 @@ formatter.formatDate(new Date()); // "2023-10-01"
 formatter.getWeekday(new Date()); // "星期一"
 ```
 
-## Constructors
+## 构造函数
 
-### Constructor
+### 构造函数
 
 > **new TimeFormatter**(): `TimeFormatter`
 
-#### Returns
+#### 返回
 
 `TimeFormatter`
 
-## Methods
+## 方法
 
 ### formatDate()
 
@@ -42,7 +42,7 @@ formatter.getWeekday(new Date()); // "星期一"
 
 生成符合 ISO 8601 的短日期格式字符串
 
-#### Parameters
+#### 参数
 
 ##### date
 
@@ -50,13 +50,13 @@ formatter.getWeekday(new Date()); // "星期一"
 
 需要格式化的日期对象（支持 Date 实例或时间戳）
 
-#### Returns
+#### 返回
 
 `string`
 
 标准化日期字符串（YYYY-MM-DD）
 
-#### Example
+#### 示例
 
 ```typescript
 // 格式化当前时间
@@ -76,7 +76,7 @@ formatter.formatDate(new Date(2024, 0, 1));
 
 获取中文星期名称
 
-#### Parameters
+#### 参数
 
 ##### date
 
@@ -84,13 +84,13 @@ formatter.formatDate(new Date(2024, 0, 1));
 
 日期对象（注意：周日对应索引 0）
 
-#### Returns
+#### 返回
 
 `string`
 
 中文星期字符串（"星期一" 至 "星期日"）
 
-#### Example
+#### 示例
 
 ```typescript
 // 获取当前星期
@@ -109,7 +109,7 @@ formatter.getWeekday(new Date(2023, 9, 2)); // "星期一"
 
 生成标准化时间字符串
 
-#### Parameters
+#### 参数
 
 ##### date
 
@@ -117,13 +117,13 @@ formatter.getWeekday(new Date(2023, 9, 2)); // "星期一"
 
 需要格式化的时间对象（支持 Date 实例或时间戳）
 
-#### Returns
+#### 返回
 
 `string`
 
 24 小时制时间字符串（HH:mm:ss）
 
-#### Example
+#### 示例
 
 ```typescript
 // 格式化当前时间

@@ -6,6 +6,6 @@
 
 # map/types
 
-## Type Aliases
+## 类型别名
 
 - [Point](type-aliases/Point.md)

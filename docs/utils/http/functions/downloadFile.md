@@ -4,13 +4,13 @@
 
 [sunrise-utils](../../../modules.md) / [utils/http](../README.md) / downloadFile
 
-# Function: downloadFile()
+# 函数: downloadFile()
 
 > **downloadFile**(`url`, `filename`): `Promise`\<`void`\>
 
 从指定 URL 下载文件并保存到本地
 
-## Parameters
+## 参数
 
 ### url
 
@@ -24,11 +24,11 @@
 
 保存时使用的文件名（需包含扩展名）
 
-## Returns
+## 返回
 
 `Promise`\<`void`\>
 
-## Example
+## 示例
 
 ```typescript
 // 下载图片文件

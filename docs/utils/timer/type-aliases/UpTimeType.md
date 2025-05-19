@@ -4,11 +4,11 @@
 
 [sunrise-utils](../../../modules.md) / [utils/timer](../README.md) / UpTimeType
 
-# Type Alias: UpTimeType
+# 类型别名: UpTimeType
 
 > **UpTimeType** = `object`
 
-## Properties
+## 属性
 
 ### formattedDate
 

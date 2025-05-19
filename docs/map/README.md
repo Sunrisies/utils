@@ -6,44 +6,44 @@
 
 # map
 
-## References
+## 参考
 
 ### out\_of\_china
 
-Re-exports [out_of_china](coordTransform/functions/out_of_china.md)
+重新导出 [out_of_china](coordTransform/functions/out_of_china.md)
 
 ***
 
 ### wgs84ToGcj02
 
-Re-exports [wgs84ToGcj02](coordTransform/variables/wgs84ToGcj02.md)
+重新导出 [wgs84ToGcj02](coordTransform/variables/wgs84ToGcj02.md)
 
 ***
 
 ### gcj02ToWgs84
 
-Re-exports [gcj02ToWgs84](coordTransform/variables/gcj02ToWgs84.md)
+重新导出 [gcj02ToWgs84](coordTransform/variables/gcj02ToWgs84.md)
 
 ***
 
 ### getCenterLonLat
 
-Re-exports [getCenterLonLat](coordinates/functions/getCenterLonLat.md)
+重新导出 [getCenterLonLat](coordinates/functions/getCenterLonLat.md)
 
 ***
 
 ### distanceLngLat
 
-Re-exports [distanceLngLat](distance/functions/distanceLngLat.md)
+重新导出 [distanceLngLat](distance/functions/distanceLngLat.md)
 
 ***
 
 ### calculateNewPoints
 
-Re-exports [calculateNewPoints](pointGeneration/functions/calculateNewPoints.md)
+重新导出 [calculateNewPoints](pointGeneration/functions/calculateNewPoints.md)
 
 ***
 
 ### Point
 
-Re-exports [Point](types/type-aliases/Point.md)
+重新导出 [Point](types/type-aliases/Point.md)

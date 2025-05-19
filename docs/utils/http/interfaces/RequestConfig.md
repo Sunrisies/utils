@@ -4,19 +4,19 @@
 
 [sunrise-utils](../../../modules.md) / [utils/http](../README.md) / RequestConfig
 
-# Interface: RequestConfig\<T\>
+# 接口: RequestConfig\<T\>
 
-## Extends
+## 继承
 
 - `Omit`\<`RequestInit`, `"body"`\>
 
-## Type Parameters
+## 类型参数
 
 ### T
 
 `T` = `unknown`
 
-## Properties
+## 属性
 
 ### params?
 
@@ -36,7 +36,7 @@
 
 A string indicating how the request will interact with the browser's cache to set request's cache.
 
-#### Inherited from
+#### 继承自
 
 `Omit.cache`
 
@@ -48,7 +48,7 @@ A string indicating how the request will interact with the browser's cache to se
 
 A string indicating whether credentials will be sent with the request always, never, or only when sent to a same-origin URL. Sets request's credentials.
 
-#### Inherited from
+#### 继承自
 
 `Omit.credentials`
 
@@ -60,7 +60,7 @@ A string indicating whether credentials will be sent with the request always, ne
 
 A Headers object, an object literal, or an array of two-item arrays to set request's headers.
 
-#### Inherited from
+#### 继承自
 
 `Omit.headers`
 
@@ -72,7 +72,7 @@ A Headers object, an object literal, or an array of two-item arrays to set reque
 
 A cryptographic hash of the resource to be fetched by request. Sets request's integrity.
 
-#### Inherited from
+#### 继承自
 
 `Omit.integrity`
 
@@ -84,7 +84,7 @@ A cryptographic hash of the resource to be fetched by request. Sets request's in
 
 A boolean to set request's keepalive.
 
-#### Inherited from
+#### 继承自
 
 `Omit.keepalive`
 
@@ -96,7 +96,7 @@ A boolean to set request's keepalive.
 
 A string to set request's method.
 
-#### Inherited from
+#### 继承自
 
 `Omit.method`
 
@@ -108,7 +108,7 @@ A string to set request's method.
 
 A string to indicate whether the request will use CORS, or will be restricted to same-origin URLs. Sets request's mode.
 
-#### Inherited from
+#### 继承自
 
 `Omit.mode`
 
@@ -118,7 +118,7 @@ A string to indicate whether the request will use CORS, or will be restricted to
 
 > `optional` **priority**: `RequestPriority`
 
-#### Inherited from
+#### 继承自
 
 `Omit.priority`
 
@@ -130,7 +130,7 @@ A string to indicate whether the request will use CORS, or will be restricted to
 
 A string indicating whether request follows redirects, results in an error upon encountering a redirect, or returns the redirect (in an opaque fashion). Sets request's redirect.
 
-#### Inherited from
+#### 继承自
 
 `Omit.redirect`
 
@@ -142,7 +142,7 @@ A string indicating whether request follows redirects, results in an error upon 
 
 A string whose value is a same-origin URL, "about:client", or the empty string, to set request's referrer.
 
-#### Inherited from
+#### 继承自
 
 `Omit.referrer`
 
@@ -154,7 +154,7 @@ A string whose value is a same-origin URL, "about:client", or the empty string, 
 
 A referrer policy to set request's referrerPolicy.
 
-#### Inherited from
+#### 继承自
 
 `Omit.referrerPolicy`
 
@@ -166,7 +166,7 @@ A referrer policy to set request's referrerPolicy.
 
 An AbortSignal to set request's signal.
 
-#### Inherited from
+#### 继承自
 
 `Omit.signal`
 
@@ -178,6 +178,6 @@ An AbortSignal to set request's signal.
 
 Can only be null. Used to disassociate request from any Window.
 
-#### Inherited from
+#### 继承自
 
 `Omit.window`

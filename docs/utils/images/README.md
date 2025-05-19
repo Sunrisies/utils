@@ -6,7 +6,7 @@
 
 # utils/images
 
-## Functions
+## 函数
 
 - [preloadAndCacheImages](functions/preloadAndCacheImages.md)
 - [preloadAndCacheImage](functions/preloadAndCacheImage.md)

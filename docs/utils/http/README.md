@@ -6,16 +6,16 @@
 
 # utils/http
 
-## Classes
+## 类
 
 - [Http](classes/Http.md)
 
-## Interfaces
+## 接口
 
 - [RequestConfig](interfaces/RequestConfig.md)
 - [ApiResponse](interfaces/ApiResponse.md)
 
-## Functions
+## 函数
 
 - [downloadFile](functions/downloadFile.md)
 - [URLSearchParamsUtils](functions/URLSearchParamsUtils.md)

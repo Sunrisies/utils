@@ -4,13 +4,13 @@
 
 [sunrise-utils](../../modules.md) / [utils](../README.md) / getContentDimensions
 
-# Function: getContentDimensions()
+# 函数: getContentDimensions()
 
 > **getContentDimensions**(`elementId`): `Error` \| \{ `width`: `number`; `height`: `number`; \}
 
 获取指定元素ID的内容区域（排除内边距padding）的尺寸。
 
-## Parameters
+## 参数
 
 ### elementId
 
@@ -18,13 +18,13 @@
 
 要获取尺寸的元素的ID
 
-## Returns
+## 返回
 
 `Error` \| \{ `width`: `number`; `height`: `number`; \}
 
 返回一个包含width和height的对象，如果找不到元素或无法获取计算样式则返回错误对象
 
-## Example
+## 示例
 
 ```typescript
 // 获取ID为 'myElement' 的元素的内容区域尺寸

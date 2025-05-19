@@ -6,6 +6,6 @@
 
 # map/distance
 
-## Functions
+## 函数
 
 - [distanceLngLat](functions/distanceLngLat.md)

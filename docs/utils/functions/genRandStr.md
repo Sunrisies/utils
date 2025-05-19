@@ -4,22 +4,22 @@
 
 [sunrise-utils](../../modules.md) / [utils](../README.md) / genRandStr
 
-# Function: genRandStr()
+# 函数: genRandStr()
 
 > **genRandStr**\<`T`\>(`length`): [`GenRandStrResult`](../type-aliases/GenRandStrResult.md)\<`T`\>
 
-## Type Parameters
+## 类型参数
 
 ### T
 
 `T`
 
-## Parameters
+## 参数
 
 ### length
 
 `T`
 
-## Returns
+## 返回
 
 [`GenRandStrResult`](../type-aliases/GenRandStrResult.md)\<`T`\>

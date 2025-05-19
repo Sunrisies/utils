@@ -9,54 +9,54 @@ export function load(app) {
     const fileReflections = new Map();
     console.log("开始加载自定义插件",);
     // 监听声明创建事件 
-    app.converter.on(Converter.EVENT_CREATE_DECLARATION, (context, reflection) => {
-        console.log("开始监听声明创建事件", context);
-        if (!reflection.sources?.length) return;
+    // app.converter.on(Converter.EVENT_CREATE_DECLARATION, (context, reflection) => {
+    //     console.log("开始监听声明创建事件", context);
+    //     if (!reflection.sources?.length) return;
 
-        const source = reflection.sources[0];
-        const filePath = path.relative(process.cwd(), source.fileName);
-        console.log("filePath", filePath);
-        console.log("reflection", reflection);
-        // 按文件路径组织反射对象
-        if (!fileReflections.has(filePath)) {
-            fileReflections.set(filePath, reflection);
-        }
-    });
+    //     const source = reflection.sources[0];
+    //     const filePath = path.relative(process.cwd(), source.fileName);
+    //     console.log("filePath", filePath);
+    //     console.log("reflection", reflection);
+    //     // 按文件路径组织反射对象
+    //     if (!fileReflections.has(filePath)) {
+    //         fileReflections.set(filePath, reflection);
+    //     }
+    // });
 
     // 监听渲染开始事件
-    app.renderer.on(Renderer.EVENT_BEGIN, (event) => {
-        // console.log("开始监听渲染开始事件", event);
-        const project = event.project;
+    // app.renderer.on(Renderer.EVENT_BEGIN, (event) => {
+    //     // console.log("开始监听渲染开始事件", event);
+    //     const project = event.project;
 
-        // 创建按文件组织的新结构
-        const fileGroups = new Map();
+    //     // 创建按文件组织的新结构
+    //     const fileGroups = new Map();
 
-        // 遍历所有反射对象，按文件分组
-        project.getReflectionsByKind(ReflectionKind.All).forEach(reflection => {
-            if (!reflection.sources?.length) return;
-            console.log("reflection", reflection);
-            // 按文件路径组织反射对象
-            const source = reflection.sources[0];
-            const filePath = path.relative(process.cwd(), source.fileName);
-            const dirPath = path.dirname(filePath);
+    //     // 遍历所有反射对象，按文件分组
+    //     project.getReflectionsByKind(ReflectionKind.All).forEach(reflection => {
+    //         if (!reflection.sources?.length) return;
+    //         console.log("reflection", reflection);
+    //         // 按文件路径组织反射对象
+    //         const source = reflection.sources[0];
+    //         const filePath = path.relative(process.cwd(), source.fileName);
+    //         const dirPath = path.dirname(filePath);
 
-            if (!fileGroups.has(dirPath)) {
-                fileGroups.set(dirPath, []);
-            }
-            fileGroups.get(dirPath)?.push(reflection);
-        });
+    //         if (!fileGroups.has(dirPath)) {
+    //             fileGroups.set(dirPath, []);
+    //         }
+    //         fileGroups.get(dirPath)?.push(reflection);
+    //     });
 
-        // 重组项目结构
-        // project.children = Array.from(fileGroups.entries()).map(([dirPath, reflections]) => {
-        //     const groupReflection = new DeclarationReflection(
-        //         dirPath,
-        //         ReflectionKind.Module,
-        //         project
-        //     );
-        //     groupReflection.children = reflections;
-        //     return groupReflection;
-        // });
-    });
+    //     // 重组项目结构
+    //     // project.children = Array.from(fileGroups.entries()).map(([dirPath, reflections]) => {
+    //     //     const groupReflection = new DeclarationReflection(
+    //     //         dirPath,
+    //     //         ReflectionKind.Module,
+    //     //         project
+    //     //     );
+    //     //     groupReflection.children = reflections;
+    //     //     return groupReflection;
+    //     // });
+    // });
 
     // 监听渲染结束事件
     app.renderer.on(Renderer.EVENT_END, () => {

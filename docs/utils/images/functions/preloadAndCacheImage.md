@@ -4,13 +4,13 @@
 
 [sunrise-utils](../../../modules.md) / [utils/images](../README.md) / preloadAndCacheImage
 
-# Function: preloadAndCacheImage()
+# 函数: preloadAndCacheImage()
 
 > **preloadAndCacheImage**(`imageUrl`): `Promise`\<`HTMLImageElement`\>
 
 预加载并缓存图片资源。
 
-## Parameters
+## 参数
 
 ### imageUrl
 
@@ -18,13 +18,13 @@
 
 图片资源的URL
 
-## Returns
+## 返回
 
 `Promise`\<`HTMLImageElement`\>
 
 返回一个Promise，该Promise在图片加载完成后解析为一个包含HTMLImageElement对象
 
-## Example
+## 示例
 
 ```typescript
 // 示例：预加载并缓存图片

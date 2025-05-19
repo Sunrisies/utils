@@ -4,16 +4,16 @@
 
 [sunrise-utils](../../../modules.md) / [utils/timer](../README.md) / TimeUpdater
 
-# Class: TimeUpdater
+# 类: TimeUpdater
 
 时间更新管理器
 
-## Remarks
+## 备注
 
 提供自动更新时间数据的能力，通过回调函数传递格式化后的时间信息。
 内置定时器每秒钟更新一次时间数据，需手动调用启动/停止方法
 
-## Example
+## 示例
 
 ```typescript
 const updater = new TimeUpdater();
@@ -27,24 +27,24 @@ updater.startUpdate(({ nowTime }) => {
 updater.stopUpdate();
 ```
 
-## Constructors
+## 构造函数
 
-### Constructor
+### 构造函数
 
 > **new TimeUpdater**(): `TimeUpdater`
 
 初始化时间更新管理器实例
 
-#### Returns
+#### 返回
 
 `TimeUpdater`
 
-#### Remarks
+#### 备注
 
 内部自动创建 Timer 和 TimeFormatter 实例
 注意：当前实现为强耦合设计，无法配置外部依赖项
 
-#### Example
+#### 示例
 
 ```typescript
 // 基础用法
@@ -55,7 +55,7 @@ const updater = new TimeUpdater();
 new TimeUpdater(customTimer, customFormatter);
 ```
 
-## Methods
+## 方法
 
 ### startUpdate()
 
@@ -63,7 +63,7 @@ new TimeUpdater(customTimer, customFormatter);
 
 开始定期更新时间。
 
-#### Parameters
+#### 参数
 
 ##### callback
 
@@ -71,7 +71,7 @@ new TimeUpdater(customTimer, customFormatter);
 
 回调函数，接收一个包含 formattedDate, today, nowTime 的对象
 
-#### Returns
+#### 返回
 
 `void`
 
@@ -83,6 +83,6 @@ new TimeUpdater(customTimer, customFormatter);
 
 停止定期更新时间。
 
-#### Returns
+#### 返回
 
 `void`

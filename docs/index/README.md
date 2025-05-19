@@ -6,152 +6,152 @@
 
 # index
 
-## References
+## 参考
 
 ### getContentDimensions
 
-Re-exports [getContentDimensions](../utils/functions/getContentDimensions.md)
+重新导出 [getContentDimensions](../utils/functions/getContentDimensions.md)
 
 ***
 
 ### genRandStr
 
-Re-exports [genRandStr](../utils/functions/genRandStr.md)
+重新导出 [genRandStr](../utils/functions/genRandStr.md)
 
 ***
 
 ### GenRandStrResult
 
-Re-exports [GenRandStrResult](../utils/type-aliases/GenRandStrResult.md)
+重新导出 [GenRandStrResult](../utils/type-aliases/GenRandStrResult.md)
 
 ***
 
 ### TimeUpdater
 
-Re-exports [TimeUpdater](../utils/timer/classes/TimeUpdater.md)
+重新导出 [TimeUpdater](../utils/timer/classes/TimeUpdater.md)
 
 ***
 
 ### UpTimeType
 
-Re-exports [UpTimeType](../utils/timer/type-aliases/UpTimeType.md)
+重新导出 [UpTimeType](../utils/timer/type-aliases/UpTimeType.md)
 
 ***
 
 ### formatChineseDateTime
 
-Re-exports [formatChineseDateTime](../utils/timer/functions/formatChineseDateTime.md)
+重新导出 [formatChineseDateTime](../utils/timer/functions/formatChineseDateTime.md)
 
 ***
 
 ### conversionTime
 
-Re-exports [conversionTime](../utils/timer/functions/conversionTime.md)
+重新导出 [conversionTime](../utils/timer/functions/conversionTime.md)
 
 ***
 
 ### convertTime
 
-Re-exports [convertTime](../utils/timer/functions/convertTime.md)
+重新导出 [convertTime](../utils/timer/functions/convertTime.md)
 
 ***
 
 ### formatBytes
 
-Re-exports [formatBytes](../utils/format/functions/formatBytes.md)
+重新导出 [formatBytes](../utils/format/functions/formatBytes.md)
 
 ***
 
 ### downloadFile
 
-Re-exports [downloadFile](../utils/http/functions/downloadFile.md)
+重新导出 [downloadFile](../utils/http/functions/downloadFile.md)
 
 ***
 
 ### Http
 
-Re-exports [Http](../utils/http/classes/Http.md)
+重新导出 [Http](../utils/http/classes/Http.md)
 
 ***
 
 ### RequestConfig
 
-Re-exports [RequestConfig](../utils/http/interfaces/RequestConfig.md)
+重新导出 [RequestConfig](../utils/http/interfaces/RequestConfig.md)
 
 ***
 
 ### ApiResponse
 
-Re-exports [ApiResponse](../utils/http/interfaces/ApiResponse.md)
+重新导出 [ApiResponse](../utils/http/interfaces/ApiResponse.md)
 
 ***
 
 ### URLSearchParamsUtils
 
-Re-exports [URLSearchParamsUtils](../utils/http/functions/URLSearchParamsUtils.md)
+重新导出 [URLSearchParamsUtils](../utils/http/functions/URLSearchParamsUtils.md)
 
 ***
 
 ### preloadAndCacheImages
 
-Re-exports [preloadAndCacheImages](../utils/images/functions/preloadAndCacheImages.md)
+重新导出 [preloadAndCacheImages](../utils/images/functions/preloadAndCacheImages.md)
 
 ***
 
 ### preloadAndCacheImage
 
-Re-exports [preloadAndCacheImage](../utils/images/functions/preloadAndCacheImage.md)
+重新导出 [preloadAndCacheImage](../utils/images/functions/preloadAndCacheImage.md)
 
 ***
 
 ### out\_of\_china
 
-Re-exports [out_of_china](../map/coordTransform/functions/out_of_china.md)
+重新导出 [out_of_china](../map/coordTransform/functions/out_of_china.md)
 
 ***
 
 ### wgs84ToGcj02
 
-Re-exports [wgs84ToGcj02](../map/coordTransform/variables/wgs84ToGcj02.md)
+重新导出 [wgs84ToGcj02](../map/coordTransform/variables/wgs84ToGcj02.md)
 
 ***
 
 ### gcj02ToWgs84
 
-Re-exports [gcj02ToWgs84](../map/coordTransform/variables/gcj02ToWgs84.md)
+重新导出 [gcj02ToWgs84](../map/coordTransform/variables/gcj02ToWgs84.md)
 
 ***
 
 ### getCenterLonLat
 
-Re-exports [getCenterLonLat](../map/coordinates/functions/getCenterLonLat.md)
+重新导出 [getCenterLonLat](../map/coordinates/functions/getCenterLonLat.md)
 
 ***
 
 ### distanceLngLat
 
-Re-exports [distanceLngLat](../map/distance/functions/distanceLngLat.md)
+重新导出 [distanceLngLat](../map/distance/functions/distanceLngLat.md)
 
 ***
 
 ### calculateNewPoints
 
-Re-exports [calculateNewPoints](../map/pointGeneration/functions/calculateNewPoints.md)
+重新导出 [calculateNewPoints](../map/pointGeneration/functions/calculateNewPoints.md)
 
 ***
 
 ### Point
 
-Re-exports [Point](../map/types/type-aliases/Point.md)
+重新导出 [Point](../map/types/type-aliases/Point.md)
 
 ***
 
 ### RelativeTimeOptions
 
-Re-exports [RelativeTimeOptions](../utils/date/interfaces/RelativeTimeOptions.md)
+重新导出 [RelativeTimeOptions](../utils/date/interfaces/RelativeTimeOptions.md)
 
 ***
 
 ### getRelativeTime
 
-Re-exports [getRelativeTime](../utils/date/functions/getRelativeTime.md)
+重新导出 [getRelativeTime](../utils/date/functions/getRelativeTime.md)

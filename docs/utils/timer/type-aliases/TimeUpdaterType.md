@@ -4,17 +4,17 @@
 
 [sunrise-utils](../../../modules.md) / [utils/timer](../README.md) / TimeUpdaterType
 
-# Type Alias: TimeUpdaterType
+# 类型别名: TimeUpdaterType
 
 > **TimeUpdaterType** = `object`
 
-## Properties
+## 属性
 
 ### startUpdate()
 
 > **startUpdate**: () => `void`
 
-#### Returns
+#### 返回
 
 `void`
 
@@ -24,6 +24,6 @@
 
 > **stopUpdate**: () => `void`
 
-#### Returns
+#### 返回
 
 `void`

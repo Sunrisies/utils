@@ -6,6 +6,6 @@
 
 # map/pointGeneration
 
-## Functions
+## 函数
 
 - [calculateNewPoints](functions/calculateNewPoints.md)

@@ -4,13 +4,13 @@
 
 [sunrise-utils](../../modules.md) / [utils](../README.md) / GenRandStrResult
 
-# Type Alias: GenRandStrResult\<T\>
+# 类型别名: GenRandStrResult\<T\>
 
 > **GenRandStrResult**\<`T`\> = `T` *extends* `number` ? `string` : `Error`
 
 根据传入的参数类型生成随机字符串或返回错误。
 
-## Type Parameters
+## 类型参数
 
 ### T
 
@@ -18,15 +18,15 @@
 
 参数的类型约束
 
-## Param
+## 参数
 
 随机字符串的长度（需为大于0的数字）
 
-## Returns
+## 返回
 
 生成的随机字符串或错误对象
 
-## Example
+## 示例
 
 ```typescript
 // 传入合法的 number 类型

@@ -6,22 +6,22 @@
 
 # utils/timer
 
-## Classes
+## 类
 
 - [TimeFormatter](classes/TimeFormatter.md)
 - [TimeUpdater](classes/TimeUpdater.md)
 - [Timer](classes/Timer.md)
 
-## Type Aliases
+## 类型别名
 
 - [TimeUpdaterType](type-aliases/TimeUpdaterType.md)
 - [UpTimeType](type-aliases/UpTimeType.md)
 
-## Variables
+## 变量
 
 - [timeUpdater](variables/timeUpdater.md)
 
-## Functions
+## 函数
 
 - [formatChineseDateTime](functions/formatChineseDateTime.md)
 - [conversionTime](functions/conversionTime.md)

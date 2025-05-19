@@ -6,6 +6,6 @@
 
 # map/mathUtils
 
-## Functions
+## 函数
 
 - [deg2rad](functions/deg2rad.md)

@@ -4,11 +4,11 @@
 
 [sunrise-utils](../../../modules.md) / [utils/date](../README.md) / RelativeTimeOptions
 
-# Interface: RelativeTimeOptions
+# 接口: RelativeTimeOptions
 
 相对时间配置选项
 
-## Properties
+## 属性
 
 ### now?
 

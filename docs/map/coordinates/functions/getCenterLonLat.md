@@ -4,13 +4,13 @@
 
 [sunrise-utils](../../../modules.md) / [map/coordinates](../README.md) / getCenterLonLat
 
-# Function: getCenterLonLat()
+# 函数: getCenterLonLat()
 
 > **getCenterLonLat**(`oneLon`, `oneLat`, `twoLon`, `twoLat`): \[`number`, `number`\]
 
 计算两个经纬度之间的中心经纬度。
 
-## Parameters
+## 参数
 
 ### oneLon
 
@@ -36,13 +36,13 @@
 
 第二个点的纬度（-90 到 90 之间）
 
-## Returns
+## 返回
 
 \[`number`, `number`\]
 
 中心点的经纬度数组 [经度, 纬度]
 
-## Example
+## 示例
 
 ```typescript
 // 计算北京和上海之间的中心点
