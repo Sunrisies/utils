@@ -89,7 +89,7 @@ export function createActivityMonitor(options: ActivityMonitorOptions) {
    */
   const check = () => {
     if (timer) clearTimeout(timer)
-    
+
     const now = Date.now()
     lastActivityTime = now
 
@@ -157,16 +157,6 @@ export function createActivityMonitor(options: ActivityMonitorOptions) {
   // 自动启动
   if (config.autoStart) {
     start()
-  }
-
-  // 窗口失焦处理
-  if (typeof window !== 'undefined') {
-    if (config.pauseOnBlur) {
-      window.addEventListener('blur', pause)
-    }
-    if (config.resumeOnFocus) {
-      window.addEventListener('focus', resume)
-    }
   }
 
   return {

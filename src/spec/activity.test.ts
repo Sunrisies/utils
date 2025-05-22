@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
-import { createActivityMonitor } from '../utils/activity'
+import { createActivityMonitor } from '../common/activity'
 
 describe('createActivityMonitor', () => {
   beforeEach(() => {
@@ -82,7 +82,7 @@ describe('createActivityMonitor', () => {
 
     monitor.start()
     monitor.pause()
-    
+
     // 暂停后超时不应触发
     vi.advanceTimersByTime(1000)
     expect(onTimeout).not.toHaveBeenCalled()
