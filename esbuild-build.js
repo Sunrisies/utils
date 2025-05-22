@@ -21,7 +21,7 @@ const init = async () => {
   // Node.js 版本
   let nodeCtx = await esbuild.context({
     ...buildConfig,
-    entryPoints: ['src/index.ts'],
+    entryPoints: ['src/common/index.ts'],
     outfile: 'dist/index.node.js',
     format: 'cjs',
     platform: 'node',

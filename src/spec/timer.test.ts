@@ -1,5 +1,5 @@
 import { describe, test, expect, vi, beforeEach, afterEach } from 'vitest';
-import { formatChineseDateTime, TimeUpdater, TimeFormatter, Timer, convertTime } from '../utils/timer';
+import { formatChineseDateTime, TimeUpdater, TimeFormatter, Timer, convertTime } from '../common/index';
 
 
 

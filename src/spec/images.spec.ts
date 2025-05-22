@@ -1,5 +1,5 @@
 import { describe, test, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { preloadAndCacheImage, preloadAndCacheImages } from "../utils/images";
+import { preloadAndCacheImage, preloadAndCacheImages } from "../browser/index";
 
 describe('preloadAndCacheImages 工具函数', () => {
     let originalImage: typeof Image

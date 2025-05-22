@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi, test } from 'vitest';
-import { ApiResponse, downloadFile, Http, URLSearchParamsUtils } from '../utils/http';
+import { ApiResponse, downloadFile, Http, URLSearchParamsUtils } from '../browser/index';
 
 // 模拟全局对象和方法
 global.URL.createObjectURL = vi.fn()

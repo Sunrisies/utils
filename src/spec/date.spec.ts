@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { getRelativeTime } from '../utils/date'
+import { getRelativeTime } from '../common/index'
 
 describe('getRelativeTime', () => {
   // 基本功能测试

@@ -1,3 +1,4 @@
-import * as ls from '../dist/index.esm'
+import * as ls from '../dist/index.node'
 console.log(ls)
-ls.downloadFile('111', '111')
+console.log(ls.genRandStr(1))
+// ls.downloadFile('111', '111')

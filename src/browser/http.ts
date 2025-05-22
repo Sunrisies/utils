@@ -1,3 +1,5 @@
+import { ensureEnvironment } from "../common/env";
+
 /**
  * 从指定 URL 下载文件并保存到本地
  * @public
@@ -12,6 +14,7 @@
  * ```
  */
 export const downloadFile = async (url: string, filename: string): Promise<void> => {
+  ensureEnvironment('browser', 'downloadFile');
   try {
     // 使用 fetch 获取文件内容
     const response = await fetch(url)

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { formatBytes } from '../utils/format'
+import { formatBytes } from '../common/index'
 
 describe('formatBytes', () => {
     // 基本功能测试
