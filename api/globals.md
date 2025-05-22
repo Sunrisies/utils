@@ -3,6 +3,8 @@
 ## 类
 
 - [Http](classes/Http.md)
+- [TimeFormatter](classes/TimeFormatter.md)
+- [Timer](classes/Timer.md)
 - [TimeUpdater](classes/TimeUpdater.md)
 
 ## 接口
@@ -17,11 +19,13 @@
 
 - [GenRandStrResult](type-aliases/GenRandStrResult.md)
 - [Point](type-aliases/Point.md)
+- [TimeUpdaterType](type-aliases/TimeUpdaterType.md)
 - [UpTimeType](type-aliases/UpTimeType.md)
 
 ## 变量
 
 - [gcj02ToWgs84](variables/gcj02ToWgs84.md)
+- [timeUpdater](variables/timeUpdater.md)
 - [wgs84ToGcj02](variables/wgs84ToGcj02.md)
 
 ## 函数
