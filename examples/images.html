@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片预加载工具示例</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h1>图片预加载工具示例</h1>
+        <a href="index.html" class="back-link">返回首页</a>
+    </header>
+    <main>
+        <section class="demo">
+            <h2>实时演示</h2>
+            <div class="images-panel">
+                <div class="input-group">
+                    <label for="imageUrl">图片URL：</label>
+                    <input type="text" id="imageUrl" placeholder="输入图片URL" value="../src/assets/test-image1.png">
+                    <button id="addUrlBtn">添加</button>
+                </div>
+                <div class="url-list">
+                    <h3>待加载图片列表</h3>
+                    <ul id="urlList"></ul>
+                </div>
+                <div class="controls">
+                    <button id="loadSingleBtn">加载单张图片</button>
+                    <button id="loadAllBtn">加载所有图片</button>
+                    <button id="clearBtn">清空列表</button>
+                </div>
+                <div class="preview">
+                    <h3>预览区域</h3>
+                    <div id="previewArea" class="preview-container"></div>
+                </div>
+                <div class="status">
+                    <div id="loadingStatus" class="loading-status"></div>
+                </div>
+            </div>
+        </section>
+        <section class="code-example">
+            <h2>代码示例</h2>
+            <pre><code id="codeExample"></code></pre>
+        </section>
+    </main>
+    <script type="module">
+        import { preloadAndCacheImage, preloadAndCacheImages } from '../dist/index.esm.js';
+
+        // 获取DOM元素
+        const imageUrl = document.getElementById('imageUrl');
+        const urlList = document.getElementById('urlList');
+        const previewArea = document.getElementById('previewArea');
+        const loadingStatus = document.getElementById('loadingStatus');
+        const codeExample = document.getElementById('codeExample');
+
+        // 图片URL列表
+        let imageUrls = ['../src/assets/test-image1.png', '../src/assets/test-image2.jpg'];
+
+        // 更新URL列表显示
+        function updateUrlList() {
+            urlList.innerHTML = '';
+            imageUrls.forEach((url, index) => {
+                const li = document.createElement('li');
+                li.textContent = url;
+                const removeBtn = document.createElement('button');
+                removeBtn.textContent = '删除';
+                removeBtn.onclick = () => {
+                    imageUrls.splice(index, 1);
+                    updateUrlList();
+                };
+                li.appendChild(removeBtn);
+                urlList.appendChild(li);
+            });
+        }
+
+        // 显示加载状态
+        function showStatus(message, isError = false) {
+            loadingStatus.textContent = message;
+            loadingStatus.className = `loading-status ${isError ? 'error' : ''}`;
+        }
+
+        // 显示预览图片
+        function showPreview(images) {
+            previewArea.innerHTML = '';
+            const imageElements = Array.isArray(images) ? images : [images];
+            imageElements.forEach(img => {
+                const container = document.createElement('div');
+                container.className = 'preview-item';
+                const clone = img.cloneNode();
+                clone.className = 'preview-image';
+                container.appendChild(clone);
+                previewArea.appendChild(container);
+            });
+        }
+
+        // 绑定事件
+        document.getElementById('addUrlBtn').onclick = () => {
+            const url = imageUrl.value.trim();
+            if (url && !imageUrls.includes(url)) {
+                imageUrls.push(url);
+                updateUrlList();
+                imageUrl.value = '';
+            }
+        };
+
+        document.getElementById('loadSingleBtn').onclick = async () => {
+            const url = imageUrl.value.trim();
+            if (!url) {
+                showStatus('请输入图片URL', true);
+                return;
+            }
+
+            showStatus('正在加载图片...');
+            try {
+                const image = await preloadAndCacheImage(url);
+                showPreview(image);
+                showStatus('图片加载成功');
+            } catch (error) {
+                showStatus(error.message, true);
+            }
+        };
+
+        document.getElementById('loadAllBtn').onclick = async () => {
+            if (imageUrls.length === 0) {
+                showStatus('请先添加图片URL', true);
+                return;
+            }
+
+            showStatus('正在加载所有图片...');
+            try {
+                const images = await preloadAndCacheImages(imageUrls);
+                showPreview(images);
+                showStatus(`成功加载 ${images.length} 张图片`);
+            } catch (error) {
+                showStatus(error.message, true);
+            }
+        };
+
+        document.getElementById('clearBtn').onclick = () => {
+            imageUrls = [];
+            updateUrlList();
+            previewArea.innerHTML = '';
+            showStatus('');
+        };
+
+        // 显示示例代码
+        codeExample.textContent = `
+// 加载单张图片
+preloadAndCacheImage('https://example.com/image.jpg')
+    .then(image => {
+        console.log('图片加载成功', image);
+        document.body.appendChild(image);
+    })
+    .catch(error => {
+        console.error('图片加载失败', error);
+    });
+
+// 加载多张图片
+const imageUrls = [
+    'https://example.com/image1.jpg',
+    'https://example.com/image2.jpg'
+];
+
+preloadAndCacheImages(imageUrls)
+    .then(images => {
+        console.log('所有图片加载成功', images);
+        images.forEach(img => document.body.appendChild(img));
+    })
+    .catch(error => {
+        console.error('图片加载失败', error);
+    });
+`;
+
+        // 初始化显示
+        updateUrlList();
+    </script>
+</body>
+</html>
