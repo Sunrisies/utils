@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>格式化工具示例</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h1>格式化工具示例</h1>
+        <a href="index.html" class="back-link">返回首页</a>
+    </header>
+    <main>
+        <section class="demo">
+            <h2>实时演示</h2>
+            <div class="format-panel">
+                <div class="input-group">
+                    <label for="bytesInput">字节数：</label>
+                    <input type="number" id="bytesInput" value="1024" min="0">
+                </div>
+                <div class="options">
+                    <div class="option-group">
+                        <label>
+                            <input type="radio" name="base" value="1024" checked>
+                            二进制（1024）
+                        </label>
+                        <label>
+                            <input type="radio" name="base" value="1000">
+                            十进制（1000）
+                        </label>
+                    </div>
+                    <div class="option-group">
+                        <label>
+                            <input type="checkbox" id="useIECUnits">
+                            使用 IEC 标准单位
+                        </label>
+                    </div>
+                    <div class="option-group">
+                        <label for="digitsSelect">小数位数：</label>
+                        <select id="digitsSelect">
+                            <option value="auto">自动</option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="result">
+                    <p>格式化结果：<span id="formatResult">-</span></p>
+                </div>
+            </div>
+        </section>
+        <section class="code-example">
+            <h2>代码示例</h2>
+            <pre><code id="codeExample"></code></pre>
+        </section>
+    </main>
+    <script type="module">
+        import { formatBytes } from '../dist/index.esm.js';
+
+        // 获取 DOM 元素
+        const bytesInput = document.getElementById('bytesInput');
+        const useIECUnits = document.getElementById('useIECUnits');
+        const digitsSelect = document.getElementById('digitsSelect');
+        const formatResult = document.getElementById('formatResult');
+        const codeExample = document.getElementById('codeExample');
+
+        // 更新格式化结果
+        function updateResult() {
+            try {
+                const bytes = Number(bytesInput.value);
+                const base = Number(document.querySelector('input[name="base"]:checked').value);
+                const digits = digitsSelect.value === 'auto' ? null : Number(digitsSelect.value);
+
+                const result = formatBytes(bytes, {
+                    base,
+                    digits,
+                    useIECUnits: useIECUnits.checked,
+                    locale: 'zh-CN'
+                });
+
+                formatResult.textContent = result;
+            } catch (error) {
+                formatResult.textContent = `错误：${error.message}`;
+            }
+        }
+
+        // 绑定事件监听
+        bytesInput.addEventListener('input', updateResult);
+        useIECUnits.addEventListener('change', updateResult);
+        digitsSelect.addEventListener('change', updateResult);
+        document.querySelectorAll('input[name="base"]').forEach(radio => {
+            radio.addEventListener('change', updateResult);
+        });
+
+        // 显示示例代码
+        codeExample.textContent = `
+// 基本用法
+formatBytes(1024) // "1 KB"
+
+// 使用二进制单位
+formatBytes(1024, { 
+    base: 1024, 
+    useIECUnits: true 
+}) // "1 KiB"
+
+// 本地化显示（中文）
+formatBytes(1024, { 
+    locale: 'zh-CN',
+    units: ['字节', 'KB', 'MB', 'GB'],
+    errorMessages: {
+        invalidNumber: '必须传入有效数字',
+        negativeValue: '文件大小不能为负数'
+    }
+}) // "1 KB"
+
+// 自定义精度
+formatBytes(1234, { 
+    digits: 2 
+}) // "1.21 KB"
+`;
+
+        // 初始化显示
+        updateResult();
+    </script>
+</body>
+
+</html>
