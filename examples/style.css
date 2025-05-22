@@ -1,66 +1,99 @@
-:root {
-    --primary-color: #3498db;
-    --secondary-color: #2ecc71;
-    --background-color: #f5f6fa;
-    --text-color: #2c3e50;
+/* 基础样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     line-height: 1.6;
-    margin: 0;
-    padding: 0;
-    background-color: var(--background-color);
-    color: var(--text-color);
+    color: #333;
+    background-color: #f5f7fa;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 header {
-    background-color: var(--primary-color);
-    color: white;
-    padding: 1rem 2rem;
-    position: relative;
+    background-color: #fff;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h1 {
+    font-size: 1.5rem;
+    color: #2c3e50;
+    margin: 0;
 }
 
 .back-link {
-    color: white;
+    color: #3498db;
     text-decoration: none;
-    position: absolute;
-    right: 2rem;
-    top: 50%;
-    transform: translateY(-50%);
+    font-size: 0.9rem;
+}
+
+.back-link:hover {
+    text-decoration: underline;
 }
 
 main {
+    flex: 1;
+    padding: 1rem;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 2rem;
+    width: 100%;
+}
+
+/* 演示区域样式 */
+.demo {
+    background: #fff;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .monitor-panel {
-    background: white;
-    border-radius: 8px;
-    padding: 1.5rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .status {
-    margin-bottom: 1.5rem;
+    flex: 1;
+    min-width: 250px;
+}
+
+.status p {
+    margin: 0.5rem 0;
+    font-size: 0.95rem;
+}
+
+.status span {
+    font-weight: 500;
+    color: #2c3e50;
 }
 
 .controls {
     display: flex;
-    gap: 1rem;
     flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: flex-start;
 }
 
 button {
     padding: 0.5rem 1rem;
     border: none;
     border-radius: 4px;
-    background-color: var(--primary-color);
+    background-color: #3498db;
     color: white;
     cursor: pointer;
+    font-size: 0.9rem;
     transition: background-color 0.2s;
 }
 
@@ -68,33 +101,96 @@ button:hover {
     background-color: #2980b9;
 }
 
+button:active {
+    transform: translateY(1px);
+}
+
+/* 事件日志样式 */
 .events-log {
-    background: white;
-    border-radius: 8px;
-    padding: 1.5rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-top: 2rem;
+    background: #f8f9fa;
+    border-radius: 6px;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+.events-log h3 {
+    font-size: 1rem;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
 }
 
 #eventsList {
     max-height: 200px;
     overflow-y: auto;
-    padding: 1rem;
-    background: #f8f9fa;
-    border-radius: 4px;
+    font-family: monospace;
+    font-size: 0.9rem;
 }
 
+#eventsList div {
+    padding: 0.25rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+/* 代码示例样式 */
 .code-example {
-    background: white;
+    background: #fff;
     border-radius: 8px;
     padding: 1.5rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-top: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.code-example h2 {
+    font-size: 1.2rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
 }
 
 pre {
     background: #f8f9fa;
+    border-radius: 6px;
     padding: 1rem;
-    border-radius: 4px;
     overflow-x: auto;
+    font-family: 'Fira Code', 'Consolas', monospace;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+code {
+    color: #2c3e50;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    header {
+        padding: 0.8rem;
+    }
+
+    h1 {
+        font-size: 1.2rem;
+    }
+
+    main {
+        padding: 0.8rem;
+    }
+
+    .demo,
+    .code-example {
+        padding: 1rem;
+    }
+
+    .monitor-panel {
+        flex-direction: column;
+    }
+
+    .status,
+    .controls {
+        width: 100%;
+    }
+
+    button {
+        flex: 1;
+        min-width: calc(50% - 0.25rem);
+    }
 }
