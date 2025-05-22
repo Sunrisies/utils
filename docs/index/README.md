@@ -146,6 +146,24 @@
 
 ***
 
+### ActivityMonitorOptions
+
+重新导出 [ActivityMonitorOptions](../utils/activity/interfaces/ActivityMonitorOptions.md)
+
+***
+
+### ActivityMonitorState
+
+重新导出 [ActivityMonitorState](../utils/activity/interfaces/ActivityMonitorState.md)
+
+***
+
+### createActivityMonitor
+
+重新导出 [createActivityMonitor](../utils/activity/functions/createActivityMonitor.md)
+
+***
+
 ### RelativeTimeOptions
 
 重新导出 [RelativeTimeOptions](../utils/date/interfaces/RelativeTimeOptions.md)

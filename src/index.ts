@@ -3,5 +3,6 @@ export { TimeUpdater, UpTimeType, formatChineseDateTime, conversionTime, convert
 export * from './map/index'
 export { formatBytes } from './utils/format'
 export * from './utils/date'
+export * from './utils/activity'
 export { downloadFile, Http, RequestConfig, ApiResponse, URLSearchParamsUtils } from './utils/http'
 export { preloadAndCacheImages, preloadAndCacheImage } from './utils/images'

@@ -14,6 +14,7 @@
 - [map/mathUtils](map/mathUtils/README.md)
 - [map/pointGeneration](map/pointGeneration/README.md)
 - [map/types](map/types/README.md)
+- [utils/activity](utils/activity/README.md)
 - [utils/date](utils/date/README.md)
 - [utils/format](utils/format/README.md)
 - [utils/http](utils/http/README.md)
