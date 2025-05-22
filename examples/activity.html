@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>活动监控器示例</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h1>活动监控器示例</h1>
+        <a href="index.html" class="back-link">返回首页</a>
+    </header>
+    <main>
+        <section class="demo">
+            <h2>实时演示</h2>
+            <div class="monitor-panel">
+                <div class="status">
+                    <p>状态: <span id="activeStatus">未启动</span></p>
+                    <p>剩余时间: <span id="remainingTime">-</span></p>
+                    <p>运行时间: <span id="elapsedTime">-</span></p>
+                </div>
+                <div class="controls">
+                    <button id="startBtn">启动</button>
+                    <button id="stopBtn">停止</button>
+                    <button id="checkBtn">触发活动</button>
+                    <button id="pauseBtn">暂停</button>
+                    <button id="resumeBtn">恢复</button>
+                </div>
+            </div>
+            <div class="events-log">
+                <h3>事件日志</h3>
+                <div id="eventsList"></div>
+            </div>
+        </section>
+        <section class="code-example">
+            <h2>代码示例</h2>
+            <pre><code id="codeExample"></code></pre>
+        </section>
+    </main>
+    <script type="module">
+        import { createActivityMonitor } from '../dist/index.esm.js';
+
+        // 获取 DOM 元素
+        const activeStatus = document.getElementById('activeStatus');
+        const remainingTime = document.getElementById('remainingTime');
+        const elapsedTime = document.getElementById('elapsedTime');
+        const eventsList = document.getElementById('eventsList');
+        const codeExample = document.getElementById('codeExample');
+
+        // 添加事件日志
+        function addEventLog(message) {
+            const logItem = document.createElement('div');
+            logItem.textContent = `${new Date().toLocaleTimeString()} - ${message}`;
+            eventsList.insertBefore(logItem, eventsList.firstChild);
+        }
+
+        // 更新状态显示
+        function updateStatus(state) {
+            activeStatus.textContent = state.isActive ? '活动中' : '非活动';
+            remainingTime.textContent = `${Math.max(0, state.remainingTime / 1000).toFixed(1)}秒`;
+            elapsedTime.textContent = `${(state.elapsedTime / 1000).toFixed(1)}秒`;
+        }
+
+        // 创建活动监控器
+        const monitor = createActivityMonitor({
+            timeout: 5000, // 5秒超时
+            onTimeout: () => {
+                addEventLog('监控器超时');
+                updateStatus(monitor.getState());
+            },
+            onActivity: () => {
+                addEventLog('检测到活动');
+                updateStatus(monitor.getState());
+            },
+            onStart: () => {
+                addEventLog('监控器启动');
+                updateStatus(monitor.getState());
+            },
+            onStop: () => {
+                addEventLog('监控器停止');
+                updateStatus(monitor.getState());
+            }
+        });
+
+        // 定期更新状态显示
+        setInterval(() => {
+            if (monitor.getState().isActive) {
+                updateStatus(monitor.getState());
+            }
+        }, 100);
+
+        // 绑定按钮事件
+        document.getElementById('startBtn').addEventListener('click', () => monitor.start());
+        document.getElementById('stopBtn').addEventListener('click', () => monitor.stop());
+        document.getElementById('checkBtn').addEventListener('click', () => monitor.check());
+        document.getElementById('pauseBtn').addEventListener('click', () => monitor.pause());
+        document.getElementById('resumeBtn').addEventListener('click', () => monitor.resume());
+
+        // 显示示例代码
+        codeExample.textContent = `
+// 创建活动监控器
+const monitor = createActivityMonitor({
+    timeout: 5000, // 5秒超时
+    onTimeout: () => console.log('监控器超时'),
+    onActivity: () => console.log('检测到活动'),
+    onStart: () => console.log('监控器启动'),
+    onStop: () => console.log('监控器停止')
+});
+
+// 启动监控
+monitor.start();
+
+// 检查活动状态
+monitor.check();
+
+// 获取当前状态
+const state = monitor.getState();
+console.log('活动状态:', state.isActive);
+console.log('剩余时间:', state.remainingTime);
+console.log('运行时间:', state.elapsedTime);
+
+// 停止监控
+monitor.stop();
+`;
+    </script>
+</body>
+
+</html>
