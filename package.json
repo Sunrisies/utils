@@ -31,7 +31,7 @@
     "docs:build": "vitepress build",
     "docs:preview": "vitepress preview",
     "commit": "git-cz",
-    "docs:push": "scp -r C:\\Users\\hover\\Desktop\\test\\npm\\npm-cli\\packages\\sunrise\\docs\\.vitepress\\dist root@47.111.168.59:/home/npm",
+    "docs:push": "scp -r ./.vitepress/dist root@sunrise1024.top:/home/www/sunrise",
     "test:unit": "jest",
     "coverage": "vitest run --coverage",
     "ui": "vitest --ui",
